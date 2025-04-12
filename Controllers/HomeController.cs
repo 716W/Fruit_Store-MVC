@@ -18,7 +18,52 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Privacy()
+    public IActionResult Index_2()
+    {
+        return View();
+    }
+
+    public IActionResult Page404()
+    {
+        return View();
+    }
+
+    public IActionResult About()
+    {
+        return View();
+    }
+
+    public IActionResult Cart()
+    {
+        return View();
+    }
+
+    public IActionResult CheckOut()
+    {
+        return View();
+    }
+
+    public IActionResult Contact()
+    {
+        return View();
+    }
+
+    public IActionResult News()
+    {
+        return View();
+    }
+
+    public IActionResult Shop()
+    {
+        return View();
+    }
+
+    public IActionResult SingleNews()
+    {
+        return View();
+    }
+
+    public IActionResult SingleProduct()
     {
         return View();
     }
