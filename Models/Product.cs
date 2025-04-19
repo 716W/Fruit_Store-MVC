@@ -10,7 +10,7 @@ namespace Fruit_Store_MVC.Models
         public decimal Price { get; set; }
         public int Quantity { get; set; }
         [NotMapped]
-        public IFormFile? ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
         public int CategoryId { get; set; }   // foreign key for Category
         
         // Navagation Properties
