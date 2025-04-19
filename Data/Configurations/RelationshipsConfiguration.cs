@@ -56,7 +56,7 @@ namespace Fruit_Store_MVC.Data.Configurations
 
             builder.Entity<Product>().HasMany(x => x.Reviews)
                 .WithOne(x => x.Product)
-                .HasForeignKey(x => x.ProductId);
+                .HasForeignKey(x => x.ProductId) ;
 
             // -------------------------------------
             // ------------- User -----------------
