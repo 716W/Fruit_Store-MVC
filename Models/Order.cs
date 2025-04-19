@@ -7,7 +7,7 @@ namespace Fruit_Store_MVC.Models
         public int Id { get; set; }
         public DateTime OrderDate { get; set; } = DateTime.Now;
         public decimal TotalAmount { get; set; }
-        public OrderStatus Status { get; set; } = OrderStatus.Pending;
+        public OrderStatus? Status { get; set; } = OrderStatus.Pending;
 
         // Foreign Keys
         public int UserId { get; set; } // foreign key for User
@@ -15,7 +15,6 @@ namespace Fruit_Store_MVC.Models
 
         // Navagation Property
         public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
-        public User User { get; set; } = new User() ;
         public Coupon? Coupon { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace Fruit_Store_MVC.Models
         public string? Title { get; set; }
         public String ? Description { get; set; }
         [NotMapped]
-        public IFormFile ? ImageUrl { get; set; }
+        public string ? ImageUrl { get; set; }
         public DateTime? CreatedDate { get; set; } = DateTime.Now;
     }
 }
