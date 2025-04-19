@@ -1,3 +1,11 @@
+using Fruit_Store_MVC.Data;
+using Fruit_Store_MVC.Reposetory;
+using Fruit_Store_MVC.Reposetory.Base;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using Fruit_Store_MVC.Reposetory; // Ensure this namespace is correct and contains GenericRepository
+using Microsoft.AspNetCore.Identity;
+
 namespace Fruit_Store_MVC
 {
     public class Program
@@ -8,6 +16,16 @@ namespace Fruit_Store_MVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            // Add Service DbContext .
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AppDbContext>();
+
+            // Add Repoestory 
+            // Fix for CS0305 and CS0246
+            builder.Services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericReposetory<,>));
 
             var app = builder.Build();
 
