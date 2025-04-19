@@ -14,16 +14,6 @@ namespace Fruit_Store_MVC.Data.Configurations
             builder.Property(x => x.Price).IsRequired().HasPrecision(6, 2);
             builder.Property(x => x.Quantity).IsRequired().HasDefaultValue(0);
             builder.Property(x => x.ImageUrl).IsRequired(false);
-
-            // --------------------------------------
-            //---------- Relationships --------------
-            //---------------------------------------
-            // products belong to a category & Category has many products
-            // One To Many Relationship
-
-            builder.HasOne(x => x.Category)
-                .WithMany(x => x.Products)
-                .HasForeignKey(x => x.CategoryId);
             
         }
     }
