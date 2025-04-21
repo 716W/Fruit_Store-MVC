@@ -21,6 +21,7 @@ namespace Fruit_Store_MVC
             builder.Services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            // this add Identity to the project and create the default tables in the database
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AppDbContext>();
 
             // Add Repoestory 
@@ -42,6 +43,8 @@ namespace Fruit_Store_MVC
 
             app.UseRouting();
 
+            // authentication comes before authorization , and it is required for authorization to work
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
