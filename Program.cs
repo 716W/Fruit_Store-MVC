@@ -3,12 +3,11 @@ using Fruit_Store_MVC.Reposetory;
 using Fruit_Store_MVC.Reposetory.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-using Fruit_Store_MVC.Reposetory; // Ensure this namespace is correct and contains GenericRepository
 using Microsoft.AspNetCore.Identity;
 
 namespace Fruit_Store_MVC
 {
-    public class Program
+    public class Program 
     {
         public static void Main(string[] args)
         {
@@ -21,7 +20,7 @@ namespace Fruit_Store_MVC
             builder.Services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            // this add Identity to the project and create the default tables in the database
+            // this add Identity to the project and create the default tables in the database .
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AppDbContext>();
 
             // Add Repoestory 
