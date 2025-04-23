@@ -4,6 +4,8 @@ using Fruit_Store_MVC.Reposetory.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.AspNetCore.Identity;
+using Fruit_Store_MVC.Services.Base;
+using Fruit_Store_MVC.Services;
 
 namespace Fruit_Store_MVC
 {
@@ -25,7 +27,14 @@ namespace Fruit_Store_MVC
 
             // Add Repoestory 
             // Fix for CS0305 and CS0246
-            builder.Services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericReposetory<,>));
+            //builder.Services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericReposetory<,>));
+
+            // Add Unit OF Work 
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            // Add Services 
+            builder.Services.AddScoped<IHomeService, HomeService>();
+            builder.Services.AddScoped<IImageService,ImageService>();
 
             var app = builder.Build();
 
