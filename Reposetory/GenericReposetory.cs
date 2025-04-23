@@ -11,7 +11,7 @@ namespace Fruit_Store_MVC.Reposetory
         {
             _context = context;
         }
-        public async Task<TEntity?> GetByIdAsync(TKey id)
+        public async Task<TEntity> GetByIdAsync(TKey id)
         {
             var entity = await _context.Set<TEntity>().FindAsync(id);
             if (entity == null)
@@ -31,15 +31,6 @@ namespace Fruit_Store_MVC.Reposetory
             await _context.SaveChangesAsync();
 
             return true;
-        }
-        public async Task<bool> UpdateAsync(TKey id, TEntity entity)
-        {
-            var existingEntity = await GetByIdAsync(id);
-            if (existingEntity == null) return false ;
-
-            _context.Entry(existingEntity).CurrentValues.SetValues(entity);
-            await _context.SaveChangesAsync();
-            return true;  
         }
         public async Task<bool> DeleteAsync(TKey id)
         {
