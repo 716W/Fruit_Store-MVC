@@ -14,7 +14,7 @@ namespace Fruit_Store_MVC.Reposetory
             _context = context;
         }
 
-        public async Task<TEntity?> GetByIdAsync(Expression<Func<TEntity, bool>> filter, string? includeProperties = null)
+        public async Task<TEntity?> Get(Expression<Func<TEntity, bool>> filter, string? includeProperties = null)
         {
             IQueryable<TEntity> query = _context.Set<TEntity>();
             if (!string.IsNullOrEmpty(includeProperties))
