@@ -1,6 +1,8 @@
 ﻿using Fruit_Store_MVC.Data;
 using Fruit_Store_MVC.Reposetory.Base;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Fruit_Store_MVC.Reposetory
 {
@@ -11,19 +13,34 @@ namespace Fruit_Store_MVC.Reposetory
         {
             _context = context;
         }
-        public async Task<TEntity> GetByIdAsync(TKey id)
+
+        public async Task<TEntity?> GetByIdAsync(Expression<Func<TEntity, bool>> filter, string? includeProperties = null)
         {
-            var entity = await _context.Set<TEntity>().FindAsync(id);
-            if (entity == null)
+            IQueryable<TEntity> query = _context.Set<TEntity>();
+            if (!string.IsNullOrEmpty(includeProperties))
             {
-                // Handle the case where the entity is not found, e.g., log or throw an exception if needed.
-                return null; // Explicitly return null if not found.
+                foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProperty);
+                }
             }
-            return entity;
+            // if u want to filter the query, pass the filter as a parameter
+            query = query.Where(filter);
+            return await query.FirstOrDefaultAsync();
         }
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        // if u want navagation properties to be included in the query, pass them as a comma-separated string
+        public async Task<IEnumerable<TEntity>> GetAllAsync(string? includeProperties = null)
         {
-            return await _context.Set<TEntity>().ToListAsync();
+            IQueryable<TEntity> query = _context.Set<TEntity>();
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
+
+            return await query.ToListAsync();
         }
         public async Task<bool> AddAsync(TEntity entity)
         {
@@ -32,12 +49,9 @@ namespace Fruit_Store_MVC.Reposetory
 
             return true;
         }
-        public async Task<bool> DeleteAsync(TKey id)
+        public async Task<bool> DeleteAsync(TEntity Entity)
         {
-            var existingEntity = await GetByIdAsync(id);
-            if (existingEntity == null) return false ;
-
-            _context.Remove(existingEntity);
+            _context.Remove(Entity);
             await _context.SaveChangesAsync();
             return true;
         }
