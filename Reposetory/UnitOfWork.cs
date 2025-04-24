@@ -12,12 +12,15 @@ namespace Fruit_Store_MVC.Reposetory
             Product = new ProductRepository(_db);
             Review = new ReviewRepository(_db);
             New = new NewRepository(_db);
+            Category = new CategoryRepository(_db);
         }
         public IProductRepository Product { get; private set; }
 
         public IReviewRepository Review { get; private set; }
 
         public INewRepository New { get; private set; }
+
+        public ICategoryRepository Category {  get; private set; }
 
         public async Task SaveAsync()
         {
