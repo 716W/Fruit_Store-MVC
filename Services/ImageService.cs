@@ -2,6 +2,14 @@
 
 namespace Fruit_Store_MVC.Services
 {
+    /// <summary>
+    /// Handles creation and update of image files for entities.
+    /// - Automatically saves files under wwwroot/Images/{folderName}
+    /// - Ensures folders are created if missing
+    /// - Supports updating image by deleting old one and saving new
+    /// </summary>
+    /// /// <summary>
+    
     public class ImageService : IImageService
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
