@@ -27,7 +27,7 @@ namespace Fruit_Store_MVC.Services
 
             if (imageFile != null)
             {
-                product.ImageUrl = _imageService.CreateImageAsync(imageFile, "Products").Result;
+                product.ImageUrl = await _imageService.CreateImageAsync(imageFile, "Products");
             }
 
             return await _unitOfWork.Product.AddAsync(product);
@@ -35,7 +35,7 @@ namespace Fruit_Store_MVC.Services
 
         public async Task<bool> DeleteAsync(int id)
         {
-            var product = await _unitOfWork.Product.GetByIdAsync(x => x.Id == id);
+            var product = await _unitOfWork.Product.Get(x => x.Id == id);
             if (product is null)
             {
                 return await Task.FromResult(false);
@@ -60,7 +60,7 @@ namespace Fruit_Store_MVC.Services
 
         public async Task<ProductViewModel> GetByIdAsync(int id)
         {
-            var product = await _unitOfWork.Product.GetByIdAsync(x => x.Id == id, includeProperties: "Category");
+            var product = await _unitOfWork.Product.Get(x => x.Id == id, includeProperties: "Category");
             if (product is null)
             {
                 return await Task.FromResult<ProductViewModel>(null);
@@ -70,37 +70,41 @@ namespace Fruit_Store_MVC.Services
                 var productViewModel = new ProductViewModel
                 {
                     Product = product,
-                    categories = _unitOfWork.Category.GetAllAsync().Result.ToList()
+                    // maybe i don't need to get the all category , if u have seaniro to make something like this u can separte
+                    // them by create other View Model to something for Deatils and something else to ProductFormOperation .
+                     //categories = (await _unitOfWork.Category.GetAllAsync()).OfType<Category>().ToList(),
                 };
                 return await Task.FromResult(productViewModel);
             }
         }
 
+        public Task<Product?> Search(string name)
+        {
+            return _unitOfWork.Product.Get(x => x.Name.ToLower().Contains(name.ToLower())
+            , includeProperties: "Category"
+            );
+        }
+
         public async Task<bool> UpdateAsync(ProductViewModel productViewModel, IFormFile? imageFile)
         {
-            var exsitProduct = _unitOfWork.Product.GetByIdAsync(x => x.Id == productViewModel.Product.Id);
-
-            if (exsitProduct is null)
+            var exsitProduct = await _unitOfWork.Product.Get(x => x.Id == productViewModel.Product.Id);
+            if (exsitProduct == null)
             {
                 return await Task.FromResult(false);
             }
-            else
-            {
-                var product = new Product
-                {
-                    Id = productViewModel.Product.Id,
-                    Name = productViewModel.Product.Name,
-                    Price = productViewModel.Product.Price,
-                    Description = productViewModel.Product.Description,
-                    CategoryId = productViewModel.Product.CategoryId
-                };
-                if (imageFile != null)
-                {
-                    product.ImageUrl = _imageService.CreateImageAsync(imageFile, "Products").Result;
-                }
 
-                return await _unitOfWork.Product.UpdateAsync(exsitProduct.Id, product);
+            exsitProduct.Name = productViewModel.Product.Name;
+            exsitProduct.Price = productViewModel.Product.Price;
+            exsitProduct.Description = productViewModel.Product.Description;
+            exsitProduct.CategoryId = productViewModel.Product.CategoryId;
+
+            if (imageFile != null)
+            {
+                exsitProduct.ImageUrl = await _imageService.CreateImageAsync(imageFile, "Products");
             }
+
+            return await _unitOfWork.Product.UpdateAsync(exsitProduct.Id, exsitProduct);
         }
+
     }
 }

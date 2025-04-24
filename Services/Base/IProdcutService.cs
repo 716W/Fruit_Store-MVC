@@ -10,6 +10,7 @@ namespace Fruit_Store_MVC.Services.Base
         Task<bool> CreateAsync(ProductViewModel productViewModel , IFormFile imageFile);
         Task<bool> UpdateAsync(ProductViewModel productViewModel , IFormFile? imageFile);
         Task<bool> DeleteAsync(int id);
+        Task<Product?> Search(string name);
 
     }
 }
