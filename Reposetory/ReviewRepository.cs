@@ -14,7 +14,7 @@ namespace Fruit_Store_MVC.Reposetory
         }
         public async Task<bool> UpdateAsync(int id, Review review)
         {
-            var existingEntity = await GetByIdAsync(x => x.Id == id);
+            var existingEntity = await Get(x => x.Id == id);
             if (existingEntity == null) return false;
 
             _context.Entry(existingEntity).CurrentValues.SetValues(review);
