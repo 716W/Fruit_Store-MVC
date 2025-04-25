@@ -12,7 +12,7 @@ namespace Fruit_Store_MVC.Services
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task<HomeViewModel> GetHomePageData()
+        public async Task<HomeViewModel> GetHomePageDataAsync()
         {
             // Use OfType<Model>() to safely filter and cast only Model items 
             // from a generic collection (e.g., IEnumerable<object>) returned by the repository

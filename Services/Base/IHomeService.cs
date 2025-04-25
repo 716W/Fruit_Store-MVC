@@ -4,7 +4,7 @@ namespace Fruit_Store_MVC.Services.Base
 {
     public interface IHomeService
     {
-        Task<HomeViewModel> GetHomePageData();
+        Task<HomeViewModel> GetHomePageDataAsync();
 
     }
 }
