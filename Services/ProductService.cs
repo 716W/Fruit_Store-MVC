@@ -78,7 +78,7 @@ namespace Fruit_Store_MVC.Services
             }
         }
 
-        public Task<Product?> Search(string name)
+        public Task<Product?> SearchAsync(string name)
         {
             return _unitOfWork.Product.Get(x => x.Name.ToLower().Contains(name.ToLower())
             , includeProperties: "Category"
