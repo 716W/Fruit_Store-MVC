@@ -5,6 +5,16 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="wwwroot\Images\Cart\**" />
+    <Compile Remove="wwwroot\Images\products\Vigetables\**" />
+    <Content Remove="wwwroot\Images\Cart\**" />
+    <Content Remove="wwwroot\Images\products\Vigetables\**" />
+    <EmbeddedResource Remove="wwwroot\Images\Cart\**" />
+    <EmbeddedResource Remove="wwwroot\Images\products\Vigetables\**" />
+    <None Remove="wwwroot\Images\Cart\**" />
+    <None Remove="wwwroot\Images\products\Vigetables\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="wwwroot\help-documentation\css\et-line-font\fonts\.DS_Store" />
   </ItemGroup>
   <ItemGroup>
@@ -23,9 +33,5 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="wwwroot\Images\Cart\" />
-    <Folder Include="wwwroot\Images\products\Vigetables\" />
   </ItemGroup>
 </Project>
