@@ -16,12 +16,6 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-<<<<<<< HEAD
-=======
-
-        return View();
-    }
->>>>>>> ae01f4f5f8a211262142acbfaa6c20a295b42b3a
 
         return View();
     }
