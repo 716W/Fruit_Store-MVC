@@ -17,9 +17,9 @@ namespace Fruit_Store_MVC.Services
             // Use OfType<Model>() to safely filter and cast only Model items 
             // from a generic collection (e.g., IEnumerable<object>) returned by the repository
 
-            var Prducts = (await _unitOfWork.Product.GetAllAsync()).OfType<Product>().ToList();
-            var Reviews = (await _unitOfWork.Review.GetAllAsync()).OfType<Review>().ToList();
-            var News = (await _unitOfWork.New.GetAllAsync()).OfType<New>().ToList();
+            var Prducts = (await _unitOfWork.Product.GetAllAsync()).Take(3).OfType<Product>().ToList();
+            var Reviews = (await _unitOfWork.Review.GetAllAsync()).Take(3).OfType<Review>().ToList();
+            var News = (await _unitOfWork.New.GetAllAsync()).Take(3).OfType<New>().ToList();
 
             var homeViewModel = new HomeViewModel
             {
