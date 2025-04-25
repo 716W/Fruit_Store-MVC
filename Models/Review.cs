@@ -7,7 +7,7 @@
         public DateTime? CreatedDate { get; set; } = DateTime.Now ;
 
         // Foregin Keys 
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         public int ProductId { get; set; }
 
         // Navagtion Property
