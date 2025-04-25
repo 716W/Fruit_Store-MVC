@@ -57,7 +57,7 @@ namespace Fruit_Store_MVC
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=StaticPage}/{action=Index}/{id?}");
 
             app.Run();
         }
