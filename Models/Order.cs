@@ -10,7 +10,7 @@ namespace Fruit_Store_MVC.Models
         public OrderStatus? Status { get; set; } = OrderStatus.Pending;
 
         // Foreign Keys
-        public int UserId { get; set; } // foreign key for User
+        public int? UserId { get; set; } // foreign key for User
         public int? CouponId { get; set; } // foreign key for Cupon
 
         // Navagation Property
