@@ -33,6 +33,9 @@ namespace Fruit_Store_MVC.Data
 
             // add class to apply realtions between entities
             RelationshipsConfiguration.Apply(modelBuilder);
+
+            // seed data for Demo and test .
+            SeedData.Initialize(modelBuilder);
         }
 
         // Create Model :
