@@ -36,7 +36,7 @@ namespace Fruit_Store_MVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("Fruit_Store_MVC.Models.Coupon", b =>
@@ -66,7 +66,7 @@ namespace Fruit_Store_MVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Coupons");
+                    b.ToTable("Coupons", (string)null);
                 });
 
             modelBuilder.Entity("Fruit_Store_MVC.Models.New", b =>
@@ -94,7 +94,7 @@ namespace Fruit_Store_MVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("News");
+                    b.ToTable("News", (string)null);
                 });
 
             modelBuilder.Entity("Fruit_Store_MVC.Models.Order", b =>
@@ -127,7 +127,7 @@ namespace Fruit_Store_MVC.Migrations
 
                     b.HasIndex("CouponId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("Fruit_Store_MVC.Models.OrderItem", b =>
@@ -149,7 +149,7 @@ namespace Fruit_Store_MVC.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("Fruit_Store_MVC.Models.Product", b =>
@@ -189,7 +189,7 @@ namespace Fruit_Store_MVC.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("Fruit_Store_MVC.Models.Review", b =>
@@ -220,7 +220,7 @@ namespace Fruit_Store_MVC.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
