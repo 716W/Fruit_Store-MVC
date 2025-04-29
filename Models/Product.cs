@@ -14,7 +14,8 @@ namespace Fruit_Store_MVC.Models
         public int CategoryId { get; set; }   // foreign key for Category
         
         // Navagation Properties
-        public Category Category { get; set; } = new Category();
+        //public Category Category { get; set; } = new Category();
+        public Category? Category { get; set; } // Nullable to allow for products without a category
         public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
         public ICollection<Review> Reviews { get; set; } = new List<Review>();
     }
