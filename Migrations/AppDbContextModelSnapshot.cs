@@ -35,8 +35,21 @@ namespace Fruit_Store_MVC.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
                     b.ToTable("Categories", (string)null);
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Fruits"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Vigetables"
+                        });
                 });
 
             modelBuilder.Entity("Fruit_Store_MVC.Models.Coupon", b =>
@@ -67,6 +80,26 @@ namespace Fruit_Store_MVC.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Coupons", (string)null);
+
+                    b.ToTable("Coupons");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "FRUIT10",
+                            DiscountPercentage = 10m,
+                            ExpiryDate = new DateTime(2025, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActived = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = "VIGETABLE1",
+                            DiscountPercentage = 5m,
+                            ExpiryDate = new DateTime(2025, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
+
                 });
 
             modelBuilder.Entity("Fruit_Store_MVC.Models.New", b =>
@@ -80,21 +113,67 @@ namespace Fruit_Store_MVC.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified));
+                        .HasDefaultValue(new DateTime(2025, 4, 26, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
                     b.ToTable("News", (string)null);
+
+                    b.ToTable("News");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(2025, 4, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Strawberries shine in spring and early summer, reminding us that every fruit has its season. Seeking them in autumn is a lesson in nature’s timing and patience.",
+                            Title = "You will vainly look for fruit on it in autumn."
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Just like tomatoes ripen in their own time, people bloom in their season. A beautiful blend of fruit imagery and life wisdom, paired with the freshness of variety.",
+                            Title = "A man's worth has its season, like tomato."
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Much like the healthy ripeness of vineyard grapes, positivity nourishes fruitful outcomes. Choose optimism—harvest wellness.",
+                            Title = "Good thoughts bear good fresh juicy fruit."
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedDate = new DateTime(2025, 2, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Experience the taste of nature with our new farm-to-door delivery. Hand-picked, organic fruits now available online!",
+                            Title = "Fruitkha Launches Organic Delivery Service"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedDate = new DateTime(2025, 3, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Discover the top fruits that can naturally strengthen your immune system—featuring citrus, berries, and more.",
+                            Title = "Top 5 Fruits to Boost Your Immunity This Season"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedDate = new DateTime(2025, 1, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Learn expert tips to select the freshest seasonal fruits at peak flavor and nutrition—straight from local farms to your table.",
+                            Title = "How to Choose Seasonal Fruits Like a Pro"
+                        });
                 });
 
             modelBuilder.Entity("Fruit_Store_MVC.Models.Order", b =>
@@ -128,6 +207,34 @@ namespace Fruit_Store_MVC.Migrations
                     b.HasIndex("CouponId");
 
                     b.ToTable("Orders", (string)null);
+
+                    b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CouponId = 1,
+                            OrderDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 3,
+                            TotalAmount = 19.99m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CouponId = 1,
+                            OrderDate = new DateTime(2025, 7, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 0,
+                            TotalAmount = 49.99m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CouponId = 2,
+                            OrderDate = new DateTime(2025, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 2,
+                            TotalAmount = 57.89m
+                        });
                 });
 
             modelBuilder.Entity("Fruit_Store_MVC.Models.OrderItem", b =>
@@ -173,12 +280,11 @@ namespace Fruit_Store_MVC.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<decimal>("Price")
-                        .HasPrecision(6, 2)
-                        .HasColumnType("decimal(6,2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Quantity")
                         .ValueGeneratedOnAdd()
@@ -189,7 +295,132 @@ namespace Fruit_Store_MVC.Migrations
 
                     b.HasIndex("CategoryId");
 
+
                     b.ToTable("Products", (string)null);
+
+                    b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            Description = "Wow, your strawberry is super fresh and juicy!",
+                            ImageUrl = "Images/Products/Fruits/Strawberry.jpg",
+                            Name = "Strawberry",
+                            Price = 4.50m,
+                            Quantity = 100
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 1,
+                            Description = "Sweet little bites of happiness — great chilled or fresh off the vine!",
+                            ImageUrl = "Images/Products/Fruits/black-grapes.jpg",
+                            Name = "Grapes",
+                            Price = 3.80m,
+                            Quantity = 100
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryId = 1,
+                            Description = "Bright and zesty — the citrus spark every dish needs!",
+                            ImageUrl = "Images/Products/Fruits/lemon.jpg",
+                            Name = "lemon",
+                            Price = 2.00m,
+                            Quantity = 100
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryId = 1,
+                            Description = "Fuzzy outside, vibrant inside — sweet and tangy delight!",
+                            ImageUrl = "Images/Products/Fruits/kiwi.jpg",
+                            Name = "kiwi",
+                            Price = 3.00m,
+                            Quantity = 100
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryId = 1,
+                            Description = "A great green apple — crisp, clean, and classic!",
+                            ImageUrl = "Images/Products/Fruits/apple.jpg",
+                            Name = "Apple",
+                            Price = 2.50m,
+                            Quantity = 100
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryId = 1,
+                            Description = "Soft, tart, and oh-so-satisfying — like tiny red gems!",
+                            ImageUrl = "Images/Products/Fruits/red-raspberries.jpg",
+                            Name = "Red-Raspberries",
+                            Price = 5.00m,
+                            Quantity = 100
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CategoryId = 2,
+                            Description = "Crunchy and sweet — the classic orange powerhouse!",
+                            ImageUrl = "Images/Products/Vigetables/Carrot.jpg",
+                            Name = "Carrot",
+                            Price = 1.50m,
+                            Quantity = 200
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CategoryId = 2,
+                            Description = "Bright green and full of goodness — a little tree of health!",
+                            ImageUrl = "Images/Products/Vigetables/Broccoli.jpg",
+                            Name = "Broccoli",
+                            Price = 2.20m,
+                            Quantity = 200
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CategoryId = 2,
+                            Description = "Juicy and rich — perfect for your next recipe or snack!",
+                            ImageUrl = "Images/Products/Vigetables/Tomato.jpg",
+                            Name = "Tomato",
+                            Price = 2.00m,
+                            Quantity = 200
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CategoryId = 2,
+                            Description = "Fresh and leafy — packed with nutrients and perfect for any dish!",
+                            ImageUrl = "Images/Products/Vigetables/Spinach.jpg",
+                            Name = "Spinach",
+                            Price = 2.50m,
+                            Quantity = 200
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CategoryId = 2,
+                            Description = "Cool, crisp, and refreshing — ideal for salads and snacking!",
+                            ImageUrl = "Images/Products/Vigetables/Cucumber.jpg",
+                            Name = "Cucumber",
+                            Price = 1.80m,
+                            Quantity = 200
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CategoryId = 2,
+                            Description = "Colorful and crunchy — nature’s sweet and savory combo!",
+                            ImageUrl = "Images/Products/Vigetables/Bell-Pepper.jpg",
+                            Name = "Bell Pepper",
+                            Price = 3.00m,
+                            Quantity = 200
+                        });
                 });
 
             modelBuilder.Entity("Fruit_Store_MVC.Models.Review", b =>
@@ -203,7 +434,7 @@ namespace Fruit_Store_MVC.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified));
+                        .HasDefaultValue(new DateTime(2025, 4, 26, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -458,7 +689,7 @@ namespace Fruit_Store_MVC.Migrations
                     b.HasOne("Fruit_Store_MVC.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Category");

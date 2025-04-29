@@ -1,9 +1,7 @@
-﻿@using Fruit_Store_MVC.ViewModels
-
+@model HomeViewModel
 @{
 	ViewData["Title"] = "Index";
 }
-@model HomeViewModel
 
 <!-- search area -->
 <div class="search-area">
@@ -97,7 +95,6 @@
 				</div>
 			</div>
 		</div>
-		
 			<div class="row">
 				<div class="col-lg-4 col-md-6 text-center">
 					<div class="single-product-item">
@@ -130,7 +127,45 @@
 					</div>
 				</div>
 			</div>
-		
+
+		<div class="row">
+			@* @foreach(var product in Model.Products)
+			{
+				<div class="col-lg-4 col-md-6 text-center">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a asp-controller="SingleProduct" asp-action="Index" asp-route-id="@product.Id">
+								<img src="@product.ImageUrl" alt="@product.Name"></a>
+						</div>
+						<h3>@product.Name</h3>
+						<p class="product-price"><span>Per Kg</span> @product.Price </p>
+						<a asp-controller="Cart" asp-action="Index" asp-route-id="@product.Id" class="cart-btn">
+							<i class="fas fa-shopping-cart"></i> Add to Cart</a>
+					</div>
+				</div>
+			} *@
+			
+			<div class="col-lg-4 col-md-6 text-center">
+				<div class="single-product-item">
+					<div class="product-image">
+						<a asp-controller="SingleProduct" asp-action="Index"><img src="~/Images/products/Fruits/black-grapes.jpg" alt=""></a>
+					</div>
+					<h3>Berry</h3>
+					<p class="product-price"><span>Per Kg</span> 70$ </p>
+					<a asp-controller="Cart" asp-action="Index" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
+				<div class="single-product-item">
+					<div class="product-image">
+						<a asp-controller="SingleProduct" asp-action="Index"><img src="~/Images/products/Fruits/lemon.jpg" alt=""></a>
+					</div>
+					<h3>Lemon</h3>
+					<p class="product-price"><span>Per Kg</span> 35$ </p>
+					<a asp-controller="Cart" asp-action="Index" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 <!-- end product section -->
