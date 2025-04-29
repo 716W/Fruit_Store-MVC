@@ -48,7 +48,7 @@ namespace Fruit_Store_MVC.Services
 
         public async Task<ProductViewModel> GetAllAsync()
         {
-            var products = (await _unitOfWork.Product.GetAllAsync(includeProperties:"Category")).OfType<Product>().ToList();
+            var products = (await _unitOfWork.Product.GetAllAsync(includeProperties : "Category")).OfType<Product>().ToList();
 
             var ViewMod = new ProductViewModel
             {
