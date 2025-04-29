@@ -34,6 +34,7 @@ namespace Fruit_Store_MVC
 
             // Add Services 
             builder.Services.AddScoped<IHomeService, HomeService>();
+            builder.Services.AddScoped<IShopService, ShopService>();
             builder.Services.AddScoped<IImageService,ImageService>();
 
             var app = builder.Build();
