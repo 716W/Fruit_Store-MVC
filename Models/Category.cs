@@ -6,6 +6,6 @@
         public string? Name { get; set;}
 
         // Navagation Properties
-        public ICollection<Product> Products { get; set; } = new List<Product>();
+        public ICollection<Product>? Products { get; set; } = new List<Product>();
     }
 }

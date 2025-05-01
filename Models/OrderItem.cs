@@ -10,7 +10,7 @@
         public int ProductId { get; set; } // foreign key for Product
 
         // Navagation Properties
-        public Order Order { get; set; } = new Order();
-        public Product Product { get; set; } = new Product();
+        public Order? Order { get; set; } = new Order();
+        public Product? Product { get; set; } = new Product();
     }
 }
