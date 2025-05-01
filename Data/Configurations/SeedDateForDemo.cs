@@ -225,9 +225,9 @@ namespace Fruit_Store_MVC.Data.Configurations
 
             //OredrItems
             modelBuilder.Entity<OrderItem>().HasData(
-                new OrderItem { OrderId = 1, ProductId = 1, Quantity = 5, UnitPrice = 5 },
-                new OrderItem { OrderId = 2, ProductId = 2, Quantity = 10, UnitPrice = 7 },
-                new OrderItem { OrderId = 3, ProductId = 3, Quantity = 15, UnitPrice = 10 }
+                new OrderItem { OrderId = 1, ProductId = 1, Quantity = 5, UnitPrice = 5},
+                new OrderItem { OrderId = 1, ProductId = 2, Quantity = 10, UnitPrice = 7 },
+                new OrderItem { OrderId = 1, ProductId = 3, Quantity = 15, UnitPrice = 10 }
             );
 
             // Reviews
