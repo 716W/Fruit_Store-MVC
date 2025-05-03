@@ -199,14 +199,14 @@ namespace Fruit_Store_MVC.Data.Configurations
                     Id = 1,
                     Code = "FRUIT10",
                     DiscountPercentage = 10,
-                    ExpiryDate = DateTime.UtcNow.AddMonths(1)
+                    ExpiryDate = new DateTime(2025,05,3).AddMonths(1)
                 },
                 new Coupon
                 {
                     Id = 2,
                     Code = "VIGETABLE1",
                     DiscountPercentage = 5,
-                    ExpiryDate = DateTime.UtcNow.AddMonths(1)
+                    ExpiryDate = new DateTime(2025, 05, 3).AddMonths(1)
                 }
             );
 
@@ -215,7 +215,7 @@ namespace Fruit_Store_MVC.Data.Configurations
                 new Order
                 {
                     Id = 1,
-                    OrderDate = DateTime.UtcNow,
+                    OrderDate = new DateTime(2025, 05, 3),
                     TotalAmount = 19.99m,
                     Status = Enums.OrderStatus.Delivered,
                     CouponId = 1,
@@ -225,9 +225,9 @@ namespace Fruit_Store_MVC.Data.Configurations
 
             //OredrItems
             modelBuilder.Entity<OrderItem>().HasData(
-                new OrderItem { OrderId = 1, ProductId = 1, Quantity = 5, UnitPrice = 5},
-                new OrderItem { OrderId = 1, ProductId = 2, Quantity = 10, UnitPrice = 7 },
-                new OrderItem { OrderId = 1, ProductId = 3, Quantity = 15, UnitPrice = 10 }
+                new OrderItem { Id = 1, OrderId = 1, ProductId = 1, Quantity = 5, UnitPrice = 5 },
+                new OrderItem { Id = 2, OrderId = 1, ProductId = 2, Quantity = 10, UnitPrice = 7 },
+                new OrderItem { Id = 3, OrderId = 1, ProductId = 3, Quantity = 15, UnitPrice = 10 }
             );
 
             // Reviews
@@ -236,7 +236,7 @@ namespace Fruit_Store_MVC.Data.Configurations
                 {
                     Id = 1,
                     Text = "Great apple!",
-                    CreatedDate = DateTime.UtcNow,
+                    CreatedDate = new DateTime(2025, 02, 3),
                     ProductId = 1,
                     UserId = null
                 },
@@ -244,7 +244,7 @@ namespace Fruit_Store_MVC.Data.Configurations
                 {
                     Id = 2,
                     Text = "Wow! Your products are so fresh and delicious.",
-                    CreatedDate = DateTime.UtcNow,
+                    CreatedDate = new DateTime(2025, 09, 3),
                     ProductId = 2,
                     UserId = null
                 }
