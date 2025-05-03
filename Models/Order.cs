@@ -14,7 +14,7 @@ namespace Fruit_Store_MVC.Models
         public int? CouponId { get; set; } // foreign key for Cupon
 
         // Navagation Property
-        public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+        public ICollection<OrderItem>? OrderItems { get; set; } = new List<OrderItem>();
         public Coupon? Coupon { get; set; }
     }
 }
