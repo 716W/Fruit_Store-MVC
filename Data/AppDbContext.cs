@@ -30,13 +30,12 @@ namespace Fruit_Store_MVC.Data
             modelBuilder.ApplyConfiguration(new ReviewConfig());
             modelBuilder.ApplyConfiguration(new NewsConfig());
             modelBuilder.ApplyConfiguration(new CuponConfig());
-            SeedData.Seed(modelBuilder);
 
             // add class to apply realtions between entities
             RelationshipsConfiguration.Apply(modelBuilder);
 
             // seed data for Demo and test .
-            //SeedData.Seed(modelBuilder);
+            SeedData.Seed(modelBuilder);
         }
 
         // Create Model :
