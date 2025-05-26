@@ -3,13 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35818.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fruit_Store_MVC", "Fruit_Store_MVC.csproj", "{452CB22C-6B6C-476A-9137-C8AD1C4C4BC1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fruit_Store.Core", "Fruit_Store.Core\Fruit_Store.Core.csproj", "{80299D1D-CA79-5495-C6D8-227F64B22E55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fruit_Store.Services", "Fruit_Store.Services\Fruit_Store.Services.csproj", "{8739FCFB-88BC-478F-B1B5-D34BFB424682}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fruit_Store.Infrastructure", "Fruit_Store.DataAccess\Fruit_Store.Infrastructure.csproj", "{8CB89928-15F9-4273-8E23-F767A4FD39AB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fruit_Store.Core", "..\Fruit_Store.Core\Fruit_Store.Core.csproj", "{40EC8271-FB3C-4642-B928-FD111365EF52}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fruit_Store_MVC", "Fruit_Store-MVC\Fruit_Store_MVC.csproj", "{6B6F75C0-C515-8675-D6FD-4EA61B3DA3CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,22 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{452CB22C-6B6C-476A-9137-C8AD1C4C4BC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{452CB22C-6B6C-476A-9137-C8AD1C4C4BC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{452CB22C-6B6C-476A-9137-C8AD1C4C4BC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{452CB22C-6B6C-476A-9137-C8AD1C4C4BC1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8739FCFB-88BC-478F-B1B5-D34BFB424682}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8739FCFB-88BC-478F-B1B5-D34BFB424682}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8739FCFB-88BC-478F-B1B5-D34BFB424682}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8739FCFB-88BC-478F-B1B5-D34BFB424682}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8CB89928-15F9-4273-8E23-F767A4FD39AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8CB89928-15F9-4273-8E23-F767A4FD39AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8CB89928-15F9-4273-8E23-F767A4FD39AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8CB89928-15F9-4273-8E23-F767A4FD39AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{40EC8271-FB3C-4642-B928-FD111365EF52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{40EC8271-FB3C-4642-B928-FD111365EF52}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{40EC8271-FB3C-4642-B928-FD111365EF52}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{40EC8271-FB3C-4642-B928-FD111365EF52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80299D1D-CA79-5495-C6D8-227F64B22E55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80299D1D-CA79-5495-C6D8-227F64B22E55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80299D1D-CA79-5495-C6D8-227F64B22E55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80299D1D-CA79-5495-C6D8-227F64B22E55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B6F75C0-C515-8675-D6FD-4EA61B3DA3CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B6F75C0-C515-8675-D6FD-4EA61B3DA3CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B6F75C0-C515-8675-D6FD-4EA61B3DA3CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B6F75C0-C515-8675-D6FD-4EA61B3DA3CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
