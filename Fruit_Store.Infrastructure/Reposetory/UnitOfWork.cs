@@ -1,4 +1,6 @@
-﻿using FruitStore.Fruit_Store.Infrastructure.Data;
+﻿using Fruit_Store.Infrastructure.Reposetory;
+using Fruit_Store.Infrastructure.Reposetory.Base;
+using FruitStore.Fruit_Store.Infrastructure.Data;
 using FruitStore.Infrastructure.Reposetory.Base;
 
 
@@ -14,6 +16,9 @@ namespace FruitStore.Infrastructure.Reposetory
             Review = new ReviewRepository(_db);
             New = new NewRepository(_db);
             Category = new CategoryRepository(_db);
+            Order = new OrderRepository(_db);
+            OrderItem = new OrderItemRepository(_db);
+            Coupon = new CouponRepository(_db);
         }
         public IProductRepository Product { get; private set; }
 
@@ -22,6 +27,12 @@ namespace FruitStore.Infrastructure.Reposetory
         public INewRepository New { get; private set; }
 
         public ICategoryRepository Category {  get; private set; }
+
+        public IOrderRepository Order { get; private set; }
+
+        public IOrderItemRepository OrderItem { get; private set; }
+
+        public ICouponRepository Coupon { get; private set; }
 
         public async Task SaveAsync()
         {
