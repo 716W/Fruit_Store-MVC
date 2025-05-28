@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="wwwroot\help-documentation\css\et-line-font\fonts\.DS_Store" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fruit_Store.Core\Fruit_Store.Core.csproj" />
+    <ProjectReference Include="..\Fruit_Store.Services\Fruit_Store.Services.csproj" />
+    <ProjectReference Include="..\Fruit_Store.Infrastructure\Fruit_Store.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>
