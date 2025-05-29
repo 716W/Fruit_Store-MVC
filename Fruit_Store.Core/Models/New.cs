@@ -7,7 +7,6 @@ namespace FruitStore.Core.Models
         public int Id { get; set; }
         public string? Title { get; set; }
         public String ? Description { get; set; }
-        [NotMapped]
         public string ? ImageUrl { get; set; }
         public DateTime? CreatedDate { get; set; } = DateTime.Now;
     }
