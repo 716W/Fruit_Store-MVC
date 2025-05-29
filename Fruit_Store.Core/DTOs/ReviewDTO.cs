@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Fruit_Store.Core.DTOs
+{
+    class ReviewDTO
+    {
+        public int Id { get; set; }
+        public string? Text { get; set; }
+        public DateTime? CreatedDate { get; set; } = DateTime.Now;
+
+        // Foreign Keys
+        public int ProductId { get; set; }
+    }
+}
