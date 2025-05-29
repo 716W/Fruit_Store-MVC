@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public string ?Code { get; set; }
-        public decimal DiscountPercentage { get; set; }
+        public decimal DiscountPercentage { get; set; } // e.g., 10 for 10%
         public DateTime ExpiryDate { get; set; }
         public bool ? IsActived { get; set; }
 
