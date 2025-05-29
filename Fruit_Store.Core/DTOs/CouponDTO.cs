@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fruit_Store.Core.DTOs
 {
-    class CouponDTO
+    public class CouponDTO
     {
         public int Id { get; set; }
         public string? Code { get; set; }

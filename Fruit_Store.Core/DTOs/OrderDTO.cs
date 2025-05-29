@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Fruit_Store.Core.DTOs
 {
-    class OrderDTO
+    public class OrderDTO
     {
         public int Id { get; set; }
         public DateTime OrderDate { get; set; } = DateTime.Now;
