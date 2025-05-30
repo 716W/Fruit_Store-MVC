@@ -30,7 +30,7 @@ namespace Fruit_Store.Services.Mappings
             // For orders
             CreateMap<Order, OrderDTO>().ReverseMap();
             
-            // For Cuopons
+            // For Coupons
             CreateMap<Coupon, CouponDTO>().ReverseMap();
 
             // For News
