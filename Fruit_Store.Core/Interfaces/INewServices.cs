@@ -10,10 +10,10 @@ namespace Fruit_Store.Core.Interfaces
     public interface INewServices
     {
         Task<IEnumerable<NewDTO>> GetLastAsync();
-        Task<NewDTO> GetByIDAsync();
-        Task AddAsync(NewDTO New);
-        Task UpdateAsync(NewDTO New);
-        Task DeleteAsync(int id);
+        Task<NewDTO?> GetByIDAsync(int id);
+        Task<bool> AddAsync(NewDTO NewDTO);
+        Task<bool> UpdateAsync(NewDTO NewDTO);
+        Task<bool> DeleteAsync(int id);
 
         // Add PaginatedResult for divide the news into pages
         // and u can use it in the controller to get the news by page
