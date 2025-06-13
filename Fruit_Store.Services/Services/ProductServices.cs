@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Fruit_Store.Services.Services
 {
-    class ProductServices : IProductServices
+    public class ProductServices : IProductServices
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;

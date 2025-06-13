@@ -6,7 +6,7 @@ using FruitStore.Infrastructure.Reposetory.Base;
 
 namespace Fruit_Store.Services.Services
 {
-    class CategoryServices : ICategoryServices
+    public class CategoryServices : ICategoryServices
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
