@@ -14,5 +14,6 @@ namespace Fruit_Store.Core.Interfaces
         Task<bool> AddAsync(OrderItemDTO Orderitem);
         Task<bool> UpdateAsync(OrderItemDTO Orderitem);
         Task<bool> DeleteAsync(int id);
+        Task<decimal> GetTotalForOrderAsync(int orderId);
     }
 }
