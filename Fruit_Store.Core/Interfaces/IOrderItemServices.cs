@@ -9,10 +9,10 @@ namespace Fruit_Store.Core.Interfaces
 {
     public interface IOrderItemServices
     {
-        Task<IEnumerable<OrderItemDTO>> GetAllAsync();
-        Task<OrderItemDTO> GetByIdAsync(int id);
-        Task AddAsync(OrderItemDTO Orderitem);
-        Task UpdateAsync(OrderItemDTO Orderitem);
-        Task DeleteAsync(int id);
+        Task<IEnumerable<OrderItemDTO?>> GetAllAsync();
+        Task<OrderItemDTO?> GetByIdAsync(int id);
+        Task<bool> AddAsync(OrderItemDTO Orderitem);
+        Task<bool> UpdateAsync(OrderItemDTO Orderitem);
+        Task<bool> DeleteAsync(int id);
     }
 }
