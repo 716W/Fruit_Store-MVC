@@ -7,7 +7,7 @@ using FruitStore.Infrastructure.Reposetory.Base;
 
 namespace Fruit_Store.Services.Services
 {
-    class OrderServices : IOrderServices
+    public class OrderServices : IOrderServices
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -32,7 +32,7 @@ namespace Fruit_Store.Services.Services
             return await _unitOfWork.Order.UpdateAsync(id, order);
         }
 
-        public  async Task<IEnumerable<OrderDTO>> GetAllAsync()
+        public  async Task<IEnumerable<OrderDTO?>> GetAllAsync()
         {
             var order = await _unitOfWork.Order.GetAllAsync();
             return _mapper.Map<IEnumerable<OrderDTO>>(order);
@@ -66,12 +66,13 @@ namespace Fruit_Store.Services.Services
 
         public async Task<bool> SubmitOrderAsync(OrderDTO order)
         {
-            var orderTransfer = _mapper.Map<Order>(order);
+            var existingOrder = await _unitOfWork.Order.Get(x => x.Id == order.Id);
+            if (existingOrder == null) return false;
 
-            orderTransfer.Status = OrderStatus.Delivered;
-            return await _unitOfWork.Order.UpdateAsync(order.Id,orderTransfer);
-
+            existingOrder.Status = OrderStatus.Delivered;
+            return await _unitOfWork.Order.UpdateAsync(order.Id, existingOrder);
         }
+
 
         public async Task<bool> UpdateOrderAsync(OrderDTO orderDTO)
         {
