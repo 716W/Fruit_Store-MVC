@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using FruitStore.Fruit_Store.Infrastructure.Data;
 using FruitStore.Infrastructure.Reposetory;
-using FruitStore.Infrastructure.Reposetory.Base;
 using Microsoft.EntityFrameworkCore;
+using Fruit_Store.Core.Interfaces.Repository;
 
 
 namespace FruitStore.Fruit_Store_MVC

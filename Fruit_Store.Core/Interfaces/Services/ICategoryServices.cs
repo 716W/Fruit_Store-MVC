@@ -1,6 +1,6 @@
 ﻿using Fruit_Store.Core.DTOs;
 
-namespace Fruit_Store.Core.Interfaces
+namespace Fruit_Store.Core.Interfaces.Services
 {
     public interface ICategoryServices
     {
