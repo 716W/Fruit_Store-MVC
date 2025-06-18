@@ -1,4 +1,4 @@
-﻿using Fruit_Store.Infrastructure.Reposetory.Base;
+﻿using Fruit_Store.Core.Interfaces.Repository;
 using FruitStore.Core.Models;
 using FruitStore.Fruit_Store.Infrastructure.Data;
 using FruitStore.Infrastructure.Reposetory;

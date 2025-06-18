@@ -1,8 +1,4 @@
-﻿using Fruit_Store.Infrastructure.Reposetory.Base;
-using FruitStore.Core.Models;
-using System.Linq.Expressions;
-
-namespace FruitStore.Infrastructure.Reposetory.Base
+﻿namespace Fruit_Store.Core.Interfaces.Repository
 {
     public interface IUnitOfWork
     {

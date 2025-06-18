@@ -1,7 +1,7 @@
-﻿using FruitStore.Infrastructure.Reposetory.Base;
-using FruitStore.Core.Models;
+﻿using FruitStore.Core.Models;
 using FruitStore.Infrastructure.Data;
 using FruitStore.Fruit_Store.Infrastructure.Data;
+using Fruit_Store.Core.Interfaces.Repository;
 
 namespace FruitStore.Infrastructure.Reposetory
 {

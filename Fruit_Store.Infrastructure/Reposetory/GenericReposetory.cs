@@ -1,5 +1,5 @@
-﻿using FruitStore.Fruit_Store.Infrastructure.Data;
-using FruitStore.Infrastructure.Reposetory.Base;
+﻿using Fruit_Store.Core.Interfaces.Repository;
+using FruitStore.Fruit_Store.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Linq.Expressions;

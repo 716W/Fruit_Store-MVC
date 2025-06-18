@@ -1,7 +1,6 @@
-﻿using FruitStore.Infrastructure.Reposetory;
-using FruitStore.Core.Models;
+﻿using FruitStore.Core.Models;
 
-namespace FruitStore.Infrastructure.Reposetory.Base
+namespace Fruit_Store.Core.Interfaces.Repository
 {
     public interface ICategoryRepository : IGenericRepository<Category,int>
     {

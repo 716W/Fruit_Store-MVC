@@ -1,8 +1,6 @@
 ﻿using FruitStore.Core.Models;
-using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-namespace FruitStore.Infrastructure.Reposetory.Base
+namespace Fruit_Store.Core.Interfaces.Repository
 {
     public interface IReviewRepository : IGenericRepository<Review , int>
     {

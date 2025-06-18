@@ -1,8 +1,7 @@
-﻿using Fruit_Store.Infrastructure.Reposetory.Base;
+﻿using Fruit_Store.Core.Interfaces.Repository;
 using FruitStore.Core.Models;
 using FruitStore.Fruit_Store.Infrastructure.Data;
 using FruitStore.Infrastructure.Reposetory;
-using FruitStore.Infrastructure.Reposetory.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
