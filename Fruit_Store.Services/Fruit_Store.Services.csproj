@@ -12,7 +12,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Fruit_Store.Core\Fruit_Store.Core.csproj" />
-		<ProjectReference Include="..\Fruit_Store.Infrastructure\Fruit_Store.Infrastructure.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
