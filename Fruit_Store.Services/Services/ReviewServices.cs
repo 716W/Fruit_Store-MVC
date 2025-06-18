@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Fruit_Store.Core.DTOs;
-using Fruit_Store.Core.Interfaces;
+using Fruit_Store.Core.Interfaces.Services;
 using FruitStore.Core.Models;
 using FruitStore.Infrastructure.Reposetory.Base;
 using System;

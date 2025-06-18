@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fruit_Store.Core.Interfaces
+namespace Fruit_Store.Core.Interfaces.Services
 {
     public interface IProductServices
     {
