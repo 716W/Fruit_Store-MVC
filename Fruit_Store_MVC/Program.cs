@@ -3,6 +3,7 @@ using FruitStore.Fruit_Store.Infrastructure.Data;
 using FruitStore.Infrastructure.Reposetory;
 using Microsoft.EntityFrameworkCore;
 using Fruit_Store.Core.Interfaces.Repository;
+using Fruit_Store_MVC.Extention;
 
 
 namespace FruitStore.Fruit_Store_MVC
@@ -30,7 +31,13 @@ namespace FruitStore.Fruit_Store_MVC
             // Add Repository
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            // Add AutoMapper
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             // Add Services
+            builder.Services.AddApplactionServices();
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
