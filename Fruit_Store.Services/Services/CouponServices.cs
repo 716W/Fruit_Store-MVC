@@ -6,7 +6,7 @@ using FruitStore.Core.Models;
 
 namespace Fruit_Store.Services.Services
 {
-    class CouponServices : ICouponServices
+    public class CouponServices : ICouponServices
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
