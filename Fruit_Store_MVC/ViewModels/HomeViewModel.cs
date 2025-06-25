@@ -1,12 +1,13 @@
-﻿using FruitStore.Core.Models;
+﻿using Fruit_Store.Core.DTOs;
+using FruitStore.Core.Models;
 
 namespace FruitStore.Fruit_Store_MVC.ViewModels
 {
     public class HomeViewModel
     {
-        public ICollection<Product>? Products { get; set; }
-        public ICollection<New>? News { get; set; }
-        public ICollection<Review>? Reviews { get; set; }
+        public IEnumerable<ProductDTO>? Products { get; set; }
+        public IEnumerable<NewDTO>? News { get; set; }
+        public IEnumerable<ReviewDTO>? Reviews { get; set; }
 
     }
 }
