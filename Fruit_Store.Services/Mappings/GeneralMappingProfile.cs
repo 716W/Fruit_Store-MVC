@@ -26,10 +26,10 @@ namespace Fruit_Store.Services.Mappings
 
             // For reviews
             CreateMap<Review, ReviewDTO>().ReverseMap();
-            
+
             // For orders
             CreateMap<Order, OrderDTO>().ReverseMap();
-            
+
             // For Coupons
             CreateMap<Coupon, CouponDTO>().ReverseMap();
 
