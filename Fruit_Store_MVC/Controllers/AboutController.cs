@@ -1,12 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Fruit_Store.Core.Interfaces.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Fruit_Store_MVC.Controllers
 {
     public class AboutController : Controller
     {
-        public IActionResult Index()
+        private readonly IReviewServices _reviewServices;
+        public AboutController(IReviewServices reviewServices)
         {
-            return View();
+            _reviewServices = reviewServices;
+        }
+        public async Task<IActionResult> IndexAsync()
+        {
+            var reviews = await _reviewServices.GetLastReviewsAsync();
+            return View(reviews);
         }
     }
 }
