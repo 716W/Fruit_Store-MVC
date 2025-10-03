@@ -37,6 +37,9 @@ namespace FruitStore.Fruit_Store_MVC
             // Add Services
             builder.Services.AddApplactionServices();
 
+            // Add Swagger services
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
@@ -46,6 +49,14 @@ namespace FruitStore.Fruit_Store_MVC
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
+            // Enable Swagger middleware
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Fruit Store API V1");
+                c.RoutePrefix = "swagger";
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
