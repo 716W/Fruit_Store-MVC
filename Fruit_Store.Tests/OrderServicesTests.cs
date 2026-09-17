@@ -160,5 +160,83 @@ namespace Fruit_Store.Tests
             Assert.Equal(2, aliceOrders.Count);
             Assert.All(aliceOrders, o => Assert.Equal("alice", o!.UserId));
         }
+
+        [Fact]
+        public async Task CreateOrderFromCartAsync_WhenCartIsEmpty_ReturnsFailure()
+        {
+            var (success, error, orderId) = await _orderServices.CreateOrderFromCartAsync(
+                "user-1", new List<CartItemForOrder>(), "John Doe", "123 Main St", "Springfield");
+
+            Assert.False(success);
+            Assert.Equal("Cart is empty.", error);
+            Assert.Equal(0, orderId);
+        }
+
+        [Fact]
+        public async Task CreateOrderFromCartAsync_WhenStockUpdateThrows_RollsBackTransactionAndReturnsFailure()
+        {
+            var product = new Product { Id = 1, Name = "Strawberry", Price = 4.50m, Quantity = 10 };
+            _productRepoMock
+                .Setup(p => p.Get(It.IsAny<Expression<Func<Product, bool>>>(), It.IsAny<string?>()))
+                .ReturnsAsync(product);
+
+            _orderRepoMock
+                .Setup(o => o.AddAsync(It.IsAny<Order>()))
+                .ReturnsAsync(true);
+
+            _productRepoMock
+                .Setup(p => p.UpdateAsync(It.IsAny<int>(), It.IsAny<Product>()))
+                .ThrowsAsync(new InvalidOperationException("DB concurrency failure"));
+
+            var items = new List<CartItemForOrder> { new() { ProductId = 1, Quantity = 2 } };
+            var (success, error, orderId) = await _orderServices.CreateOrderFromCartAsync(
+                "user-1", items, "John Doe", "123 Main St", "Springfield");
+
+            Assert.False(success);
+            Assert.Contains("error occurred", error);
+            Assert.Equal(0, orderId);
+            _unitOfWorkMock.Verify(u => u.RollbackTransactionAsync(), Times.Once);
+        }
+
+        [Fact]
+        public async Task CancelOrderAsync_WhenAlreadyCancelled_ReturnsFalseAndDoesNotRestock()
+        {
+            var product = new Product { Id = 1, Name = "Apple", Quantity = 10 };
+            var cancelledOrder = new Order
+            {
+                Id = 20,
+                Status = OrderStatus.Cancelled,
+                OrderItems = new List<OrderItem> { new() { ProductId = 1, Quantity = 5, UnitPrice = 2.0m } }
+            };
+
+            _orderRepoMock
+                .Setup(o => o.Get(It.IsAny<Expression<Func<Order, bool>>>(), It.IsAny<string?>()))
+                .ReturnsAsync(cancelledOrder);
+
+            var result = await _orderServices.CancelOrderAsync(20);
+
+            Assert.False(result);
+            Assert.Equal(10, product.Quantity); // Remains unchanged
+            _productRepoMock.Verify(p => p.UpdateAsync(It.IsAny<int>(), It.IsAny<Product>()), Times.Never);
+        }
+
+        [Fact]
+        public async Task UpdateStatusAsync_WhenAttemptingToReactivateCancelledOrder_ReturnsFalse()
+        {
+            var cancelledOrder = new Order
+            {
+                Id = 30,
+                Status = OrderStatus.Cancelled
+            };
+
+            _orderRepoMock
+                .Setup(o => o.Get(It.IsAny<Expression<Func<Order, bool>>>(), It.IsAny<string?>()))
+                .ReturnsAsync(cancelledOrder);
+
+            var result = await _orderServices.UpdateStatusAsync(30, OrderStatus.Processing);
+
+            Assert.False(result);
+            _orderRepoMock.Verify(o => o.UpdateAsync(It.IsAny<int>(), It.IsAny<Order>()), Times.Never);
+        }
     }
 }
