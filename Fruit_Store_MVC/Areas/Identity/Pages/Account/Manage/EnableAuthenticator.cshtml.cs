@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
@@ -102,7 +102,7 @@ namespace Fruit_Store_MVC.Areas.Identity.Pages.Account.Manage
             if (await _userManager.CountRecoveryCodesAsync(user) == 0)
             {
                 var recoveryCodes = await _userManager.GenerateNewTwoFactorRecoveryCodesAsync(user, 10);
-                RecoveryCodes = recoveryCodes.ToArray();
+                RecoveryCodes = recoveryCodes?.ToArray() ?? Array.Empty<string>();
                 return RedirectToPage("./ShowRecoveryCodes");
             }
             else
@@ -121,10 +121,10 @@ namespace Fruit_Store_MVC.Areas.Identity.Pages.Account.Manage
                 unformattedKey = await _userManager.GetAuthenticatorKeyAsync(user);
             }
 
-            SharedKey = FormatKey(unformattedKey);
+            SharedKey = FormatKey(unformattedKey!);
 
             var email = await _userManager.GetEmailAsync(user);
-            AuthenticatorUri = GenerateQrCodeUri(email, unformattedKey);
+            AuthenticatorUri = GenerateQrCodeUri(email ?? string.Empty, unformattedKey!);
         }
 
         private string FormatKey(string unformattedKey)
