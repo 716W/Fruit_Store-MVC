@@ -1,9 +1,5 @@
-﻿using Fruit_Store.Core.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Fruit_Store.Core.DTOs;
+using FruitStore.Core.Enums;
 
 namespace Fruit_Store.Core.Interfaces.Services
 {
@@ -16,6 +12,10 @@ namespace Fruit_Store.Core.Interfaces.Services
         Task<bool> CancelOrderAsync(int id);
         Task<bool> AddToCartAsync(OrderDTO orderDTO);
         Task<bool> UpdateOrderAsync(OrderDTO orderDTO);
-        Task<bool> RemoveFromCartAsync(int id); 
+        Task<bool> RemoveFromCartAsync(int id);
+        Task<bool> UpdateStatusAsync(int id, OrderStatus newStatus);
+        Task<(bool Success, string? Error, int OrderId)> CreateOrderFromCartAsync(
+            string userId, IEnumerable<CartItemForOrder> cartItems,
+            string? shippingName, string? shippingAddress, string? shippingCity, int? couponId = null);
     }
 }

@@ -1,0 +1,61 @@
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Dashboard";
+}
+
+<h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+<hr>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="stat-card green">
+            <p>Products</p>
+            <h2>@ViewBag.ProductCount</h2>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card blue">
+            <p>Categories</p>
+            <h2>@ViewBag.CategoryCount</h2>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card orange">
+            <p>Total Orders</p>
+            <h2>@ViewBag.OrderCount</h2>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card red">
+            <p>Pending Orders</p>
+            <h2>@ViewBag.PendingOrderCount</h2>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header"><strong>Revenue (non-cancelled orders)</strong></div>
+            <div class="card-body">
+                <h3 style="color:#27ae60;">$@(((decimal?)ViewBag.Revenue ?? 0m).ToString("0.00"))</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header"><strong>Quick Actions</strong></div>
+            <div class="card-body">
+                <a href="/Admin/Products/Create" class="btn btn-success mr-2">
+                    <i class="fas fa-plus"></i> Add Product
+                </a>
+                <a href="/Admin/Categories/Create" class="btn btn-primary mr-2">
+                    <i class="fas fa-plus"></i> Add Category
+                </a>
+                <a href="/Admin/Orders" class="btn btn-warning">
+                    <i class="fas fa-list"></i> View Orders
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

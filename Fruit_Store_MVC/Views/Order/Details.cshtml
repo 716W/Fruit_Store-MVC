@@ -1,0 +1,80 @@
+@using Fruit_Store.Core.DTOs
+@model OrderDTO
+
+@{
+    ViewData["Title"] = $"Order #{Model.Id}";
+}
+
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 offset-lg-2 text-center">
+				<div class="breadcrumb-text">
+					<p>Your order details</p>
+					<h1>Order #@Model.Id</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="mt-100 mb-150">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card" style="border-radius:10px; padding:20px;">
+					<h4>Order Summary</h4>
+					<hr>
+					<dl class="row">
+						<dt class="col-sm-5">Order Date</dt>
+						<dd class="col-sm-7">@Model.OrderDate.ToString("MMM dd, yyyy HH:mm")</dd>
+						<dt class="col-sm-5">Status</dt>
+						<dd class="col-sm-7"><span class="badge badge-warning">@Model.Status</span></dd>
+						<dt class="col-sm-5">Total</dt>
+						<dd class="col-sm-7"><strong>$@Model.TotalAmount.ToString("0.00")</strong></dd>
+					</dl>
+					<h5 style="margin-top:15px;">Shipping Details</h5>
+					<p>
+						@Model.ShippingName <br>
+						@Model.ShippingAddress <br>
+						@Model.ShippingCity
+					</p>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card" style="border-radius:10px; padding:20px;">
+					<h4>Items Ordered</h4>
+					<hr>
+					@if (Model.Items.Any())
+					{
+						<table class="table table-sm">
+							<thead>
+								<tr><th>Item</th><th>Qty</th><th>Price</th><th>Total</th></tr>
+							</thead>
+							<tbody>
+								@foreach (var item in Model.Items)
+								{
+									<tr>
+										<td>@(item.ProductName ?? $"Product #{item.ProductId}")</td>
+										<td>@item.Quantity</td>
+										<td>$@item.UnitPrice.ToString("0.00")</td>
+										<td>$@((item.Quantity * item.UnitPrice).ToString("0.00"))</td>
+									</tr>
+								}
+							</tbody>
+						</table>
+					}
+					else
+					{
+						<p>No items found.</p>
+					}
+				</div>
+			</div>
+		</div>
+		<div style="margin-top:20px;">
+			<a asp-controller="Order" asp-action="MyOrders" class="boxed-btn">Back to My Orders</a>
+			<a asp-controller="Shop" asp-action="Index" class="boxed-btn black" style="margin-left:10px;">Continue Shopping</a>
+		</div>
+	</div>
+</div>

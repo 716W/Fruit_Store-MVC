@@ -1,4 +1,4 @@
-﻿using FruitStore.Core.Models;
+using FruitStore.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,7 +11,7 @@ namespace FruitStore.Infrastructure.Data.Configurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.OrderDate).IsRequired()
                 .HasDefaultValueSql("GETDATE()");
-            builder.Property(x => x.TotalAmount).IsRequired().IsRequired()
+            builder.Property(x => x.TotalAmount).IsRequired()
                 .HasPrecision(10, 2);
             builder.Property(x => x.Status).IsRequired(false);
 

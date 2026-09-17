@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +15,6 @@ namespace Fruit_Store.Core.DTOs
         // Foreign Keys
         public int OrderId { get; set; } // foreign key for Order
         public int ProductId { get; set; } // foreign key for Product
+        public string? ProductName { get; set; }
     }
 }

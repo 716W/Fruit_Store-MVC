@@ -1,8 +1,7 @@
-﻿
+
 @{
-	ViewData["Title"] = "Index";
+	ViewData["Title"] = "Home";
 }
-@model HomeViewModel
 
 <!-- search area -->
 <div class="search-area">
@@ -101,31 +100,31 @@
 			<div class="col-lg-4 col-md-6 text-center">
 				<div class="single-product-item">
 					<div class="product-image">
-						<a asp-controller="SingleProduct" asp-action="Index"><img src="~/Images/products/Fruits/Strawberry.jpg" alt=""></a>
+						<a asp-controller="SingleProduct" asp-action="Index" asp-route-id="1"><img src="~/Images/Products/Strawberry.jpg" onerror="this.src='/Images/Products/Fruits/Strawberry.jpg'" alt=""></a>
 					</div>
 					<h3>Strawberry</h3>
-					<p class="product-price"><span>Per Kg</span> 85$ </p>
-					<a asp-controller="Cart" asp-action="Index" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+					<p class="product-price"><span>Per Kg</span> $4.50 </p>
+					<a asp-controller="SingleProduct" asp-action="Index" asp-route-id="1" class="cart-btn"><i class="fas fa-eye"></i> View Product</a>
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-6 text-center">
 				<div class="single-product-item">
 					<div class="product-image">
-						<a asp-controller="SingleProduct" asp-action="Index"><img src="~/Images/products/Fruits/black-grapes.jpg" alt=""></a>
+						<a asp-controller="SingleProduct" asp-action="Index" asp-route-id="2"><img src="~/Images/Products/black-grapes.jpg" onerror="this.src='/Images/Products/Fruits/black-grapes.jpg'" alt=""></a>
 					</div>
-					<h3>Berry</h3>
-					<p class="product-price"><span>Per Kg</span> 70$ </p>
-					<a asp-controller="Cart" asp-action="Index" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+					<h3>Grapes</h3>
+					<p class="product-price"><span>Per Kg</span> $3.80 </p>
+					<a asp-controller="SingleProduct" asp-action="Index" asp-route-id="2" class="cart-btn"><i class="fas fa-eye"></i> View Product</a>
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
 				<div class="single-product-item">
 					<div class="product-image">
-						<a hasp-controller="SingleProduct" asp-action="Index"><img src="~/Images/products/Fruits/lemon.jpg" alt=""></a>
+						<a asp-controller="SingleProduct" asp-action="Index" asp-route-id="3"><img src="~/Images/Products/lemon.jpg" onerror="this.src='/Images/Products/Fruits/lemon.jpg'" alt=""></a>
 					</div>
 					<h3>Lemon</h3>
-					<p class="product-price"><span>Per Kg</span> 35$ </p>
-					<a asp-controller="Cart" asp-action="Index" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+					<p class="product-price"><span>Per Kg</span> $2.00 </p>
+					<a asp-controller="SingleProduct" asp-action="Index" asp-route-id="3" class="cart-btn"><i class="fas fa-eye"></i> View Product</a>
 				</div>
 			</div>
 		</div>
@@ -156,7 +155,7 @@
 				<div class="text">Quisquam minus maiores repudiandae nobis, minima saepe id, fugit ullam similique! Beatae, minima quisquam molestias facere ea. Perspiciatis unde omnis iste natus error sit voluptatem accusant</div>
 				<!--Countdown Timer-->
 				<div class="time-counter"><div class="time-countdown clearfix" data-countdown="2020/2/01"><div class="counter-column"><div class="inner"><span class="count">00</span>Days</div></div> <div class="counter-column"><div class="inner"><span class="count">00</span>Hours</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Mins</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Secs</div></div></div></div>
-				<a asp-controller="Cart" asp-action="Index" class="cart-btn mt-3"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+				<a asp-controller="Shop" asp-action="Index" class="cart-btn mt-3"><i class="fas fa-shopping-bag"></i> Shop Deals</a>
 			</div>
 		</div>
 	</div>

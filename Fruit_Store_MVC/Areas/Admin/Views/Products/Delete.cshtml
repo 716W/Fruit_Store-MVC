@@ -1,0 +1,26 @@
+@using Fruit_Store.Core.DTOs
+@model ProductDTO
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Delete Product";
+}
+
+<h2><i class="fas fa-trash"></i> Delete Product</h2>
+<hr>
+
+<div class="card border-danger" style="max-width:500px;">
+    <div class="card-header bg-danger text-white">Confirm Deletion</div>
+    <div class="card-body">
+        <p>Are you sure you want to delete <strong>@Model.Name</strong>?</p>
+        <dl class="row">
+            <dt class="col-sm-4">Price</dt><dd class="col-sm-8">$@Model.Price.ToString("0.00")</dd>
+            <dt class="col-sm-4">Stock</dt><dd class="col-sm-8">@Model.Quantity</dd>
+        </dl>
+        <p class="text-danger"><small>This action cannot be undone. If the product is referenced by existing orders, deletion will be blocked.</small></p>
+        <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Yes, Delete</button>
+            <a asp-action="Index" class="btn btn-secondary ml-2">Cancel</a>
+        </form>
+    </div>
+</div>

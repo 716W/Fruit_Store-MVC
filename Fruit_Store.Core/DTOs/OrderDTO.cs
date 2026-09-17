@@ -1,9 +1,4 @@
-﻿using FruitStore.Core.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using FruitStore.Core.Enums;
 
 namespace Fruit_Store.Core.DTOs
 {
@@ -15,6 +10,15 @@ namespace Fruit_Store.Core.DTOs
         public OrderStatus? Status { get; set; } = OrderStatus.Pending;
 
         // Foreign Keys
+        public string? UserId { get; set; }
         public int? CouponId { get; set; }
+
+        // Shipping info
+        public string? ShippingName { get; set; }
+        public string? ShippingAddress { get; set; }
+        public string? ShippingCity { get; set; }
+
+        // Navigation
+        public List<OrderItemDTO> Items { get; set; } = new();
     }
 }
