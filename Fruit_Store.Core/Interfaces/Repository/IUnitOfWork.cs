@@ -1,4 +1,4 @@
-﻿namespace Fruit_Store.Core.Interfaces.Repository
+namespace Fruit_Store.Core.Interfaces.Repository
 {
     public interface IUnitOfWork
     {
@@ -10,5 +10,8 @@
         INewRepository New { get; }
         ICategoryRepository Category { get; }
         Task SaveAsync();
+        Task BeginTransactionAsync();
+        Task CommitTransactionAsync();
+        Task RollbackTransactionAsync();
     }
 }

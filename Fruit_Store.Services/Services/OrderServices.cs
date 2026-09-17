@@ -26,7 +26,10 @@ namespace Fruit_Store.Services.Services
             string userId, IEnumerable<CartItemForOrder> cartItems,
             string? shippingName, string? shippingAddress, string? shippingCity, int? couponId = null)
         {
-            // Load all required products in one query
+            if (cartItems == null || !cartItems.Any())
+                return (false, "Cart is empty.", 0);
+
+            // Load all required products
             var productIds = cartItems.Select(c => c.ProductId).ToList();
             var products = new List<Product>();
             foreach (var pid in productIds)
@@ -79,18 +82,28 @@ namespace Fruit_Store.Services.Services
                 OrderItems = orderItems
             };
 
-            // Persist order (cascade saves order items)
-            await _unitOfWork.Order.AddAsync(order);
-
-            // Decrement stock
-            foreach (var cartItem in cartItems)
+            await _unitOfWork.BeginTransactionAsync();
+            try
             {
-                var product = products.First(p => p.Id == cartItem.ProductId);
-                product.Quantity -= cartItem.Quantity;
-                await _unitOfWork.Product.UpdateAsync(product.Id, product);
-            }
+                // Persist order (cascade saves order items)
+                await _unitOfWork.Order.AddAsync(order);
 
-            return (true, null, order.Id);
+                // Decrement stock
+                foreach (var cartItem in cartItems)
+                {
+                    var product = products.First(p => p.Id == cartItem.ProductId);
+                    product.Quantity -= cartItem.Quantity;
+                    await _unitOfWork.Product.UpdateAsync(product.Id, product);
+                }
+
+                await _unitOfWork.CommitTransactionAsync();
+                return (true, null, order.Id);
+            }
+            catch (Exception)
+            {
+                await _unitOfWork.RollbackTransactionAsync();
+                return (false, "An error occurred while creating your order. Please try again.", 0);
+            }
         }
 
         public async Task<bool> AddToCartAsync(OrderDTO orderDTO)
@@ -104,22 +117,37 @@ namespace Fruit_Store.Services.Services
             var order = await _unitOfWork.Order.Get(x => x.Id == id, "OrderItems");
             if (order is null) return false;
 
-            // Restore stock on cancellation
-            if (order.OrderItems != null)
+            // Prevent double-restocking if already cancelled
+            if (order.Status == OrderStatus.Cancelled)
+                return false;
+
+            await _unitOfWork.BeginTransactionAsync();
+            try
             {
-                foreach (var item in order.OrderItems)
+                // Restore stock on cancellation
+                if (order.OrderItems != null)
                 {
-                    var product = await _unitOfWork.Product.Get(p => p.Id == item.ProductId);
-                    if (product != null)
+                    foreach (var item in order.OrderItems)
                     {
-                        product.Quantity += item.Quantity;
-                        await _unitOfWork.Product.UpdateAsync(product.Id, product);
+                        var product = await _unitOfWork.Product.Get(p => p.Id == item.ProductId);
+                        if (product != null)
+                        {
+                            product.Quantity += item.Quantity;
+                            await _unitOfWork.Product.UpdateAsync(product.Id, product);
+                        }
                     }
                 }
-            }
 
-            order.Status = OrderStatus.Cancelled;
-            return await _unitOfWork.Order.UpdateAsync(id, order);
+                order.Status = OrderStatus.Cancelled;
+                var updated = await _unitOfWork.Order.UpdateAsync(id, order);
+                await _unitOfWork.CommitTransactionAsync();
+                return updated;
+            }
+            catch (Exception)
+            {
+                await _unitOfWork.RollbackTransactionAsync();
+                return false;
+            }
         }
 
         public async Task<IEnumerable<OrderDTO?>> GetAllAsync()
@@ -175,25 +203,40 @@ namespace Fruit_Store.Services.Services
             var order = await _unitOfWork.Order.Get(x => x.Id == id, "OrderItems");
             if (order == null) return false;
 
-            // If cancelling an active order, restore inventory
-            if (newStatus == OrderStatus.Cancelled && order.Status != OrderStatus.Cancelled)
+            // Reject transitioning out of Cancelled to prevent inventory desynchronization
+            if (order.Status == OrderStatus.Cancelled && newStatus != OrderStatus.Cancelled)
+                return false;
+
+            await _unitOfWork.BeginTransactionAsync();
+            try
             {
-                if (order.OrderItems != null)
+                // If cancelling an active order, restore inventory
+                if (newStatus == OrderStatus.Cancelled && order.Status != OrderStatus.Cancelled)
                 {
-                    foreach (var item in order.OrderItems)
+                    if (order.OrderItems != null)
                     {
-                        var product = await _unitOfWork.Product.Get(p => p.Id == item.ProductId);
-                        if (product != null)
+                        foreach (var item in order.OrderItems)
                         {
-                            product.Quantity += item.Quantity;
-                            await _unitOfWork.Product.UpdateAsync(product.Id, product);
+                            var product = await _unitOfWork.Product.Get(p => p.Id == item.ProductId);
+                            if (product != null)
+                            {
+                                product.Quantity += item.Quantity;
+                                await _unitOfWork.Product.UpdateAsync(product.Id, product);
+                            }
                         }
                     }
                 }
-            }
 
-            order.Status = newStatus;
-            return await _unitOfWork.Order.UpdateAsync(id, order);
+                order.Status = newStatus;
+                var updated = await _unitOfWork.Order.UpdateAsync(id, order);
+                await _unitOfWork.CommitTransactionAsync();
+                return updated;
+            }
+            catch (Exception)
+            {
+                await _unitOfWork.RollbackTransactionAsync();
+                return false;
+            }
         }
     }
 }
