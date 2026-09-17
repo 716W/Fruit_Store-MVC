@@ -1,6 +1,9 @@
-﻿
+@using Fruit_Store_MVC.Models
+@model List<CartItem>
+
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Your Cart";
+    var subtotal = Model.Sum(c => c.LineTotal);
 }
 
 <!-- search area -->
@@ -20,7 +23,7 @@
 		</div>
 	</div>
 </div>
-<!-- end search arewa -->
+<!-- end search area -->
 <!-- breadcrumb-section -->
 <div class="breadcrumb-section breadcrumb-bg">
 	<div class="container">
@@ -35,94 +38,126 @@
 	</div>
 </div>
 <!-- end breadcrumb section -->
-<!-- cart -->
-<div class="cart-section mt-150 mb-150">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-8 col-md-12">
-				<div class="cart-table-wrap">
-					<table class="cart-table">
-						<thead class="cart-table-head">
-							<tr class="table-head-row">
-								<th class="product-remove"></th>
-								<th class="product-image">Product Image</th>
-								<th class="product-name">Name</th>
-								<th class="product-price">Price</th>
-								<th class="product-quantity">Quantity</th>
-								<th class="product-total">Total</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="table-body-row">
-								<td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
-								<td class="product-image"><img src="~/Images/products/Fruits/Strawberry.jpg" alt=""></td>
-								<td class="product-name">Strawberry</td>
-								<td class="product-price">$85</td>
-								<td class="product-quantity"><input type="number" placeholder="0"></td>
-								<td class="product-total">1</td>
-							</tr>
-							<tr class="table-body-row">
-								<td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
-								<td class="product-image"><img src="~/Images/products/Fruits/black-grapes.jpg" alt=""></td>
-								<td class="product-name">Berry</td>
-								<td class="product-price">$70</td>
-								<td class="product-quantity"><input type="number" placeholder="0"></td>
-								<td class="product-total">1</td>
-							</tr>
-							<tr class="table-body-row">
-								<td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
-								<td class="product-image"><img src="~/Images/products/Fruits/lemon.jpg" alt=""></td>
-								<td class="product-name">Lemon</td>
-								<td class="product-price">$35</td>
-								<td class="product-quantity"><input type="number" placeholder="0"></td>
-								<td class="product-total">1</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
 
-			<div class="col-lg-4">
-				<div class="total-section">
-					<table class="total-table">
-						<thead class="total-table-head">
-							<tr class="table-total-row">
-								<th>Total</th>
-								<th>Price</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="total-data">
-								<td><strong>Subtotal: </strong></td>
-								<td>$500</td>
-							</tr>
-							<tr class="total-data">
-								<td><strong>Shipping: </strong></td>
-								<td>$45</td>
-							</tr>
-							<tr class="total-data">
-								<td><strong>Total: </strong></td>
-								<td>$545</td>
-							</tr>
-						</tbody>
-					</table>
-					<div class="cart-buttons">
-						<a asp-controller="Cart" asp-action="Index" class="boxed-btn">Update Cart</a>
-						<a asp-controller="CheckOut" asp-action="Index" class="boxed-btn black">Check Out</a>
-					</div>
-				</div>
-
-				<div class="coupon-section">
-					<h3>Apply Coupon</h3>
-					<div class="coupon-form-wrap">
-						<form action="index.html">
-							<p><input type="text" placeholder="Coupon"></p>
-							<p><input type="submit" value="Apply"></p>
-						</form>
-					</div>
-				</div>
-			</div>
+<!-- Feedback Messages -->
+<div class="container mt-3">
+	@if (TempData["CartSuccess"] != null)
+	{
+		<div class="alert alert-success alert-dismissible fade show" role="alert">
+			@TempData["CartSuccess"]
+			<button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
 		</div>
+	}
+	@if (TempData["CartError"] != null)
+	{
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			@TempData["CartError"]
+			<button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+		</div>
+	}
+</div>
+
+<!-- cart -->
+<div class="cart-section mt-80 mb-150">
+	<div class="container">
+		@if (!Model.Any())
+		{
+			<div class="row">
+				<div class="col-12 text-center" style="padding: 60px 0;">
+					<i class="fas fa-shopping-cart" style="font-size:4rem; color:#ccc; margin-bottom:20px;"></i>
+					<h3>Your cart is empty</h3>
+					<p>Looks like you haven't added anything yet.</p>
+					<a asp-controller="Shop" asp-action="Index" class="boxed-btn mt-3">Browse Products</a>
+				</div>
+			</div>
+		}
+		else
+		{
+			<div class="row">
+				<div class="col-lg-8 col-md-12">
+					<div class="cart-table-wrap">
+						<table class="cart-table">
+							<thead class="cart-table-head">
+								<tr class="table-head-row">
+									<th class="product-remove"></th>
+									<th class="product-image">Image</th>
+									<th class="product-name">Name</th>
+									<th class="product-price">Price</th>
+									<th class="product-quantity">Quantity</th>
+									<th class="product-total">Total</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var item in Model)
+								{
+									<tr class="table-body-row">
+										<td class="product-remove">
+											<form asp-controller="Cart" asp-action="RemoveItem" method="post">
+												@Html.AntiForgeryToken()
+												<input type="hidden" name="productId" value="@item.ProductId" />
+												<button type="submit" style="background:none; border:none; cursor:pointer; color:#e74c3c;">
+													<i class="far fa-window-close"></i>
+												</button>
+											</form>
+										</td>
+										<td class="product-image">
+											@if (!string.IsNullOrEmpty(item.ImageUrl))
+											{
+												<img src="~/Images/Products/@item.ImageUrl.Replace("Images/Products/", "")"
+												     onerror="this.src='/assets/img/product-placeholder.jpg'"
+												     alt="@item.ProductName" style="width:60px; height:60px; object-fit:cover;">
+											}
+										</td>
+										<td class="product-name">@item.ProductName</td>
+										<td class="product-price">$@item.UnitPrice.ToString("0.00")</td>
+										<td class="product-quantity">
+											<form asp-controller="Cart" asp-action="UpdateQuantity" method="post" style="display:flex; align-items:center; gap:5px;">
+												@Html.AntiForgeryToken()
+												<input type="hidden" name="productId" value="@item.ProductId" />
+												<input type="number" name="quantity" value="@item.Quantity" min="0" style="width:70px;" class="form-control">
+												<button type="submit" class="boxed-btn" style="padding:5px 10px; font-size:12px;">Update</button>
+											</form>
+										</td>
+										<td class="product-total">$@item.LineTotal.ToString("0.00")</td>
+									</tr>
+								}
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="col-lg-4">
+					<div class="total-section">
+						<table class="total-table">
+							<thead class="total-table-head">
+								<tr class="table-total-row">
+									<th>Summary</th>
+									<th>Price</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="total-data">
+									<td><strong>Subtotal: </strong></td>
+									<td>$@subtotal.ToString("0.00")</td>
+								</tr>
+								<tr class="total-data">
+									<td><strong>Items: </strong></td>
+									<td>@Model.Sum(c => c.Quantity)</td>
+								</tr>
+								<tr class="total-data">
+									<td><strong>Total: </strong></td>
+									<td><strong>$@subtotal.ToString("0.00")</strong></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="cart-buttons">
+							<a asp-controller="Shop" asp-action="Index" class="boxed-btn">Continue Shopping</a>
+							<a asp-controller="CheckOut" asp-action="Index" class="boxed-btn black">Checkout</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		}
 	</div>
 </div>
 <!-- end cart -->
@@ -132,21 +167,11 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="logo-carousel-inner">
-					<div class="single-logo-item">
-						<img src="~/Images/company logos/1.png" alt="">
-					</div>
-					<div class="single-logo-item">
-						<img src="~/Images/company logos/2.png" alt="">
-					</div>
-					<div class="single-logo-item">
-						<img src="~/Images/company logos/3.png" alt="">
-					</div>
-					<div class="single-logo-item">
-						<img src="~/Images/company logos/4.png" alt="">
-					</div>
-					<div class="single-logo-item">
-						<img src="~/Images/company logos/5.png" alt="">
-					</div>
+					<div class="single-logo-item"><img src="~/Images/company logos/1.png" alt=""></div>
+					<div class="single-logo-item"><img src="~/Images/company logos/2.png" alt=""></div>
+					<div class="single-logo-item"><img src="~/Images/company logos/3.png" alt=""></div>
+					<div class="single-logo-item"><img src="~/Images/company logos/4.png" alt=""></div>
+					<div class="single-logo-item"><img src="~/Images/company logos/5.png" alt=""></div>
 				</div>
 			</div>
 		</div>

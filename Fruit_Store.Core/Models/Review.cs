@@ -1,4 +1,4 @@
-﻿namespace FruitStore.Core.Models
+namespace FruitStore.Core.Models
 {
     public class Review
     {
@@ -7,7 +7,7 @@
         public DateTime? CreatedDate { get; set; } = DateTime.Now ;
 
         // Foregin Keys 
-        public int? UserId { get; set; }
+        public string? UserId { get; set; } // foreign key for IdentityUser (string ID)
         public int ProductId { get; set; }
 
         // Navagtion Property

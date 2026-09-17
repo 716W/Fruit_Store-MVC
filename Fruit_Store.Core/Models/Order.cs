@@ -1,4 +1,4 @@
-﻿
+
 using FruitStore.Core.Enums;
 
 namespace FruitStore.Core.Models
@@ -11,10 +11,15 @@ namespace FruitStore.Core.Models
         public OrderStatus? Status { get; set; } = OrderStatus.Pending;
 
         // Foreign Keys
-        public int? UserId { get; set; } // foreign key for User
-        public int? CouponId { get; set; } // foreign key for Cupon
+        public string? UserId { get; set; } // foreign key for IdentityUser (string ID)
+        public int? CouponId { get; set; } // foreign key for Coupon
 
-        // Navagation Property
+        // Shipping info (snapshot at order time)
+        public string? ShippingName { get; set; }
+        public string? ShippingAddress { get; set; }
+        public string? ShippingCity { get; set; }
+
+        // Navigation Property
         public ICollection<OrderItem>? OrderItems { get; set; } = new List<OrderItem>();
         public Coupon? Coupon { get; set; }
     }

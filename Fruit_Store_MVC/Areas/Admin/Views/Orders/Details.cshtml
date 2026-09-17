@@ -1,0 +1,57 @@
+@using Fruit_Store.Core.DTOs
+@model OrderDTO
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = $"Order #{Model.Id}";
+}
+
+<h2><i class="fas fa-eye"></i> Order #@Model.Id Details</h2>
+<hr>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header"><strong>Order Info</strong></div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-5">Order Date</dt><dd class="col-sm-7">@Model.OrderDate.ToString("MMM dd, yyyy HH:mm")</dd>
+                    <dt class="col-sm-5">Status</dt><dd class="col-sm-7"><span class="badge badge-warning">@Model.Status</span></dd>
+                    <dt class="col-sm-5">Total</dt><dd class="col-sm-7"><strong>$@Model.TotalAmount.ToString("0.00")</strong></dd>
+                    <dt class="col-sm-5">Customer ID</dt><dd class="col-sm-7"><small>@(Model.UserId ?? "Guest")</small></dd>
+                    <dt class="col-sm-5">Ship To</dt><dd class="col-sm-7">@Model.ShippingName</dd>
+                    <dt class="col-sm-5">Address</dt><dd class="col-sm-7">@Model.ShippingAddress, @Model.ShippingCity</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header"><strong>Order Items</strong></div>
+            <div class="card-body">
+                @if (Model.Items.Any())
+                {
+                    <table class="table table-sm">
+                        <thead><tr><th>Product</th><th>Qty</th><th>Unit Price</th><th>Total</th></tr></thead>
+                        <tbody>
+                            @foreach (var item in Model.Items)
+                            {
+                                <tr>
+                                    <td>@(item.ProductName ?? $"Product #{item.ProductId}")</td>
+                                    <td>@item.Quantity</td>
+                                    <td>$@item.UnitPrice.ToString("0.00")</td>
+                                    <td>$@((item.Quantity * item.UnitPrice).ToString("0.00"))</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p>No items.</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Back to Orders</a>

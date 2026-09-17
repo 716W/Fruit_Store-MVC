@@ -1,0 +1,83 @@
+@using Fruit_Store.Core.DTOs
+@using FruitStore.Core.Enums
+@model IEnumerable<OrderDTO>
+
+@{
+    ViewData["Title"] = "My Orders";
+}
+
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 offset-lg-2 text-center">
+				<div class="breadcrumb-text">
+					<p>Track your purchases</p>
+					<h1>My Orders</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end breadcrumb section -->
+
+<div class="mt-100 mb-150">
+	<div class="container">
+		@if (!Model.Any())
+		{
+			<div class="text-center" style="padding:60px 0;">
+				<i class="fas fa-shopping-bag" style="font-size:4rem; color:#ccc;"></i>
+				<h3 style="margin-top:20px;">No orders yet</h3>
+				<p>Start shopping to see your orders here.</p>
+				<a asp-controller="Shop" asp-action="Index" class="boxed-btn">Browse Products</a>
+			</div>
+		}
+		else
+		{
+			<h3>Your Orders</h3>
+			<hr>
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Order #</th>
+							<th>Date</th>
+							<th>Shipping To</th>
+							<th>Total</th>
+							<th>Status</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var order in Model.OrderByDescending(o => o.OrderDate))
+						{
+							<tr>
+								<td>#@order.Id</td>
+								<td>@order.OrderDate.ToString("MMM dd, yyyy")</td>
+								<td>@order.ShippingName, @order.ShippingCity</td>
+								<td>$@order.TotalAmount.ToString("0.00")</td>
+								<td>
+									@{
+										var cls = order.Status switch {
+											OrderStatus.Pending => "badge-warning",
+											OrderStatus.Processing => "badge-info",
+											OrderStatus.Shipped => "badge-primary",
+											OrderStatus.Delivered => "badge-success",
+											OrderStatus.Cancelled => "badge-danger",
+											_ => "badge-secondary"
+										};
+									}
+									<span class="badge @cls">@order.Status</span>
+								</td>
+								<td>
+									<a asp-controller="Order" asp-action="Details" asp-route-id="@order.Id"
+									   class="boxed-btn" style="padding:5px 12px; font-size:13px;">View</a>
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		}
+	</div>
+</div>

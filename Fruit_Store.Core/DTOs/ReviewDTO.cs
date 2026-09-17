@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +13,7 @@ namespace Fruit_Store.Core.DTOs
         public DateTime? CreatedDate { get; set; } = DateTime.Now;
 
         // Foreign Keys
+        public string? UserId { get; set; }
         public int ProductId { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using FruitStore.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -19,7 +19,9 @@ namespace Fruit_Store.Services.Mappings
             CreateMap<Product, ProductDTO>().ReverseMap();
 
             // For order items
-            CreateMap<OrderItem, OrderItemDTO>().ReverseMap();
+            CreateMap<OrderItem, OrderItemDTO>()
+                .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product != null ? src.Product.Name : null))
+                .ReverseMap();
 
             // For categories
             CreateMap<Category, CategoryDTO>().ReverseMap();
@@ -27,8 +29,11 @@ namespace Fruit_Store.Services.Mappings
             // For reviews
             CreateMap<Review, ReviewDTO>().ReverseMap();
 
-            // For orders
-            CreateMap<Order, OrderDTO>().ReverseMap();
+            // For orders - map Items from OrderItems collection
+            CreateMap<Order, OrderDTO>()
+                .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.OrderItems))
+                .ReverseMap()
+                .ForMember(dest => dest.OrderItems, opt => opt.MapFrom(src => src.Items));
 
             // For Coupons
             CreateMap<Coupon, CouponDTO>().ReverseMap();

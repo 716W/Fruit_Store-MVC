@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Fruit_Store.Core.DTOs;
 using Fruit_Store.Core.Interfaces.Repository;
 using Fruit_Store.Core.Interfaces.Services;
@@ -63,14 +63,9 @@ namespace Fruit_Store.Services.Services
 
         public async Task<IEnumerable<ReviewDTO>> GetByUserIdAsync(string userId)
         {
-            var reviews = await _unitOfWork.Review.GetAllAsync("User");
-
-            // if u make user Entity solve this and make code unChecked .
-            //var filteredReviews = reviews.Where(r => r.UserId == userId);
-
-            return _mapper.Map<IEnumerable<ReviewDTO>>(reviews);
-
-            
+            var reviews = await _unitOfWork.Review.GetAllAsync();
+            var filteredReviews = reviews.Where(r => r.UserId == userId);
+            return _mapper.Map<IEnumerable<ReviewDTO>>(filteredReviews);
         }
 
         public async Task<IEnumerable<ReviewDTO>> GetLastReviewsAsync()

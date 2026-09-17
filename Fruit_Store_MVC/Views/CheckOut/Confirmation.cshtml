@@ -1,0 +1,91 @@
+@using Fruit_Store.Core.DTOs
+@model OrderDTO
+
+@{
+    ViewData["Title"] = "Order Confirmed";
+}
+
+<div class="breadcrumb-section breadcrumb-bg">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 offset-lg-2 text-center">
+				<div class="breadcrumb-text">
+					<p>Thank you for your purchase!</p>
+					<h1>Order Confirmed</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="confirmation-section mt-150 mb-150">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-7">
+				<div class="text-center mb-4">
+					<i class="fas fa-check-circle" style="font-size:5rem; color:#5cb85c;"></i>
+					<h2 style="margin-top:20px;">Order #@Model.Id Placed Successfully!</h2>
+					<p style="color:#777;">Your order has been received and is being prepared.</p>
+				</div>
+				<div style="background:#f9f9f9; border-radius:10px; padding:25px; margin-bottom:25px;">
+					<h4>Order Details</h4>
+					<table class="table" style="margin-top:15px;">
+						<tbody>
+							<tr>
+								<td><strong>Order ID</strong></td>
+								<td>#@Model.Id</td>
+							</tr>
+							<tr>
+								<td><strong>Date</strong></td>
+								<td>@Model.OrderDate.ToString("MMM dd, yyyy HH:mm")</td>
+							</tr>
+							<tr>
+								<td><strong>Status</strong></td>
+								<td><span class="badge badge-warning">@Model.Status</span></td>
+							</tr>
+							<tr>
+								<td><strong>Shipping To</strong></td>
+								<td>@Model.ShippingName, @Model.ShippingAddress, @Model.ShippingCity</td>
+							</tr>
+							<tr>
+								<td><strong>Total</strong></td>
+								<td><strong>$@Model.TotalAmount.ToString("0.00")</strong></td>
+							</tr>
+						</tbody>
+					</table>
+
+					@if (Model.Items.Any())
+					{
+						<h5 style="margin-top:15px;">Items Ordered</h5>
+						<table class="table table-sm">
+							<thead>
+								<tr>
+									<th>Product</th>
+									<th>Qty</th>
+									<th>Unit Price</th>
+									<th>Total</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var item in Model.Items)
+								{
+									<tr>
+										<td>@(item.ProductName ?? $"Product #{item.ProductId}")</td>
+										<td>@item.Quantity</td>
+										<td>$@item.UnitPrice.ToString("0.00")</td>
+										<td>$@((item.Quantity * item.UnitPrice).ToString("0.00"))</td>
+									</tr>
+								}
+							</tbody>
+						</table>
+					}
+				</div>
+
+				<div class="text-center">
+					<a asp-controller="Order" asp-action="MyOrders" class="boxed-btn">View My Orders</a>
+					<a asp-controller="Shop" asp-action="Index" class="boxed-btn black" style="margin-left:10px;">Continue Shopping</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

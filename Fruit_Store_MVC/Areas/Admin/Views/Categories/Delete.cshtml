@@ -1,0 +1,22 @@
+@using Fruit_Store.Core.DTOs
+@model CategoryDTO
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Delete Category";
+}
+
+<h2><i class="fas fa-trash"></i> Delete Category</h2>
+<hr>
+
+<div class="card border-danger" style="max-width:500px;">
+    <div class="card-header bg-danger text-white">Confirm Deletion</div>
+    <div class="card-body">
+        <p>Are you sure you want to delete category <strong>@Model.Name</strong>?</p>
+        <p class="text-danger"><small>If products are associated with this category, deletion will be blocked.</small></p>
+        <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Yes, Delete</button>
+            <a asp-action="Index" class="btn btn-secondary ml-2">Cancel</a>
+        </form>
+    </div>
+</div>

@@ -1,4 +1,5 @@
-﻿using FruitStore.Core.Models;
+using FruitStore.Core.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace FruitStore.Infrastructure.Data.Configurations
@@ -21,9 +22,11 @@ namespace FruitStore.Infrastructure.Data.Configurations
                .HasForeignKey(x => x.OrderId);
 
             // Order has one User & User has many Orders
-            //builder.Entity<Order>().HasOne(x => x.User)
-            //    .WithMany(x => x.Users)
-            //    .HasForeignKey(x => x.UserId);
+            builder.Entity<Order>().HasOne<IdentityUser>()
+                .WithMany()
+                .HasForeignKey(x => x.UserId)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.SetNull);
 
             // Order has one Coupon & Coupon has many Orders
             builder.Entity<Order>().HasOne(x => x.Coupon)
@@ -56,19 +59,18 @@ namespace FruitStore.Infrastructure.Data.Configurations
 
             builder.Entity<Product>().HasMany(x => x.Reviews)
                 .WithOne(x => x.Product)
-                .HasForeignKey(x => x.ProductId) ;
+                .HasForeignKey(x => x.ProductId);
 
             // -------------------------------------
-            // ------------- User -----------------
-            // User has many Orders & Order belongs to a User
-            // User has many Reviews & Review belongs to a User
-            // I'll implemnted after add Identity , cause i need to add the IdentityUser class and inherit from it 
+            // ------------- Review / User -----------------
+            // Review belongs to an optional User (Identity)
+            builder.Entity<Review>().HasOne<IdentityUser>()
+                .WithMany()
+                .HasForeignKey(x => x.UserId)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.SetNull);
 
             //------------------------------------
-
-
-
-
         }
     }
 }

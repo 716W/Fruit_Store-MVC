@@ -1,4 +1,4 @@
-﻿using FruitStore.Core.Models;
+using FruitStore.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,7 +10,7 @@ namespace FruitStore.Infrastructure.Data.Configurations
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Text).IsRequired().HasMaxLength(150);
-            builder.Property(x => x.CreatedDate).IsRequired().HasDefaultValue(new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day));
+            builder.Property(x => x.CreatedDate).IsRequired().HasDefaultValueSql("GETDATE()");
         }
     }
 }
