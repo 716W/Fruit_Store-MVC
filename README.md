@@ -227,11 +227,11 @@ Fruit_Store-MVC/
 The test suite validates core business logic, cart operations, stock consistency, and authorization constraints:
 
 ```bash
-Passed!  - Failed: 0, Passed: 30, Skipped: 0, Total: 30, Duration: 176 ms
+Passed!  - Failed: 0, Passed: 34, Skipped: 0, Total: 34, Duration: 118 ms
 ```
 
 - **CartService (8 tests)**: Add, item increment, quantity update, zero-quantity removal, item removal, cart clearing, subtotal accuracy.
-- **OrderServices (5 tests)**: Stock availability verification, atomic stock decrement, purchase price snapshotting, restock on order cancellation, and IDOR customer order isolation.
+- **OrderServices (9 tests)**: Stock availability verification, atomic stock decrement with transaction rollback, purchase price snapshotting, restock on order cancellation, duplicate cancellation prevention, status transition validation, empty cart handling, and IDOR customer order isolation.
 - **Security & Authorization (17 tests)**: Admin role enforcement on all admin controllers, customer authentication constraints, and Anti-Forgery token enforcement on all state-mutating POST actions.
 
 ---
