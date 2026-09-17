@@ -91,6 +91,9 @@ namespace FruitStore.Fruit_Store_MVC
                 });
             }
 
+            // Custom 404 handler using themed Page404
+            app.UseStatusCodePagesWithReExecute("/Page404");
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

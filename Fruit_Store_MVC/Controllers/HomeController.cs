@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using FruitStore.Core.Models;
 using Fruit_Store.Core.Interfaces.Services;
@@ -21,20 +21,9 @@ namespace FruitStore.MVC.Controllers
             _productServices = productServices;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var products = await _productServices.GetAllAsync();
-            var news = await _newsServices.GetLastAsync();
-            var reviews = await _reviewServices.GetLastReviewsAsync();
-
-            var viewModel = new HomeViewModel
-            {
-                Products = products,
-                News = news,
-                Reviews = reviews
-            };
-
-            return View(viewModel);
+            return RedirectToAction("Index", "StaticPage");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
