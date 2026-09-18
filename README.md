@@ -163,6 +163,7 @@ Two EF Core migrations are included in `Fruit_Store.Infrastructure/Migrations/`:
      "DefaultConnection": "Server=localhost;Database=Fruit_Store;Trusted_Connection=True;TrustServerCertificate=True"
    }
    ```
+   Alternatively, copy `Fruit_Store_MVC/appsettings.Development.json.example` to `Fruit_Store_MVC/appsettings.Development.json` and configure your local development credentials (the file is ignored by Git).
 
 3. **Apply Database Migrations**:
    ```bash

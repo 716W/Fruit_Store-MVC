@@ -361,3 +361,15 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Local environment configuration & user secrets
+appsettings.Development.json
+appsettings.*.local.json
+
+# Visual Studio Code
+.vscode/
+
+# Prepros configuration & cache
+prepros-6.config
+prepros.config
+prepros.cfg
